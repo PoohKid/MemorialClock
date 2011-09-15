@@ -1,0 +1,283 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		05B772BC142253B1008A0B5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B772BB142253B1008A0B5D /* UIKit.framework */; };
+		05B772BE142253B1008A0B5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B772BD142253B1008A0B5D /* Foundation.framework */; };
+		05B772C0142253B1008A0B5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B772BF142253B1008A0B5D /* CoreGraphics.framework */; };
+		05B772C6142253B1008A0B5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05B772C4142253B1008A0B5D /* InfoPlist.strings */; };
+		05B772C9142253B1008A0B5D /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B772C8142253B1008A0B5D /* main.m */; };
+		05B772CC142253B1008A0B5D /* MemorialClockAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B772CB142253B1008A0B5D /* MemorialClockAppDelegate.m */; };
+		05B772CF142253B1008A0B5D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B772CD142253B1008A0B5D /* MainWindow.xib */; };
+		05B772D2142253B1008A0B5D /* MemorialClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B772D1142253B1008A0B5D /* MemorialClockViewController.m */; };
+		05B772D5142253B1008A0B5D /* MemorialClockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B772D3142253B1008A0B5D /* MemorialClockViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		05B772B7142253B1008A0B5D /* MemorialClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemorialClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		05B772BB142253B1008A0B5D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		05B772BD142253B1008A0B5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		05B772BF142253B1008A0B5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		05B772C3142253B1008A0B5D /* MemorialClock-Info.plist */ = {isa = PBXFileReference; path = "MemorialClock-Info.plist"; sourceTree = "<group>"; };
+		05B772C5142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		05B772C7142253B1008A0B5D /* MemorialClock-Prefix.pch */ = {isa = PBXFileReference; path = "MemorialClock-Prefix.pch"; sourceTree = "<group>"; };
+		05B772C8142253B1008A0B5D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		05B772CA142253B1008A0B5D /* MemorialClockAppDelegate.h */ = {isa = PBXFileReference; path = MemorialClockAppDelegate.h; sourceTree = "<group>"; };
+		05B772CB142253B1008A0B5D /* MemorialClockAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemorialClockAppDelegate.m; sourceTree = "<group>"; };
+		05B772CE142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
+		05B772D0142253B1008A0B5D /* MemorialClockViewController.h */ = {isa = PBXFileReference; path = MemorialClockViewController.h; sourceTree = "<group>"; };
+		05B772D1142253B1008A0B5D /* MemorialClockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemorialClockViewController.m; sourceTree = "<group>"; };
+		05B772D4142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MemorialClockViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		05B772B4142253B1008A0B5D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05B772BC142253B1008A0B5D /* UIKit.framework in Frameworks */,
+				05B772BE142253B1008A0B5D /* Foundation.framework in Frameworks */,
+				05B772C0142253B1008A0B5D /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		05B772AC142253B1008A0B5D = {
+			isa = PBXGroup;
+			children = (
+				05B772C1142253B1008A0B5D /* MemorialClock */,
+				05B772BA142253B1008A0B5D /* Frameworks */,
+				05B772B8142253B1008A0B5D /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		05B772B8142253B1008A0B5D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				05B772B7142253B1008A0B5D /* MemorialClock.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		05B772BA142253B1008A0B5D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				05B772BB142253B1008A0B5D /* UIKit.framework */,
+				05B772BD142253B1008A0B5D /* Foundation.framework */,
+				05B772BF142253B1008A0B5D /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		05B772C1142253B1008A0B5D /* MemorialClock */ = {
+			isa = PBXGroup;
+			children = (
+				05B772CA142253B1008A0B5D /* MemorialClockAppDelegate.h */,
+				05B772CB142253B1008A0B5D /* MemorialClockAppDelegate.m */,
+				05B772CD142253B1008A0B5D /* MainWindow.xib */,
+				05B772D0142253B1008A0B5D /* MemorialClockViewController.h */,
+				05B772D1142253B1008A0B5D /* MemorialClockViewController.m */,
+				05B772D3142253B1008A0B5D /* MemorialClockViewController.xib */,
+				05B772C2142253B1008A0B5D /* Supporting Files */,
+			);
+			path = MemorialClock;
+			sourceTree = "<group>";
+		};
+		05B772C2142253B1008A0B5D /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				05B772C3142253B1008A0B5D /* MemorialClock-Info.plist */,
+				05B772C4142253B1008A0B5D /* InfoPlist.strings */,
+				05B772C7142253B1008A0B5D /* MemorialClock-Prefix.pch */,
+				05B772C8142253B1008A0B5D /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		05B772B6142253B1008A0B5D /* MemorialClock */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05B772D8142253B1008A0B5D /* Build configuration list for PBXNativeTarget "MemorialClock" */;
+			buildPhases = (
+				05B772B3142253B1008A0B5D /* Sources */,
+				05B772B4142253B1008A0B5D /* Frameworks */,
+				05B772B5142253B1008A0B5D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MemorialClock;
+			productName = MemorialClock;
+			productReference = 05B772B7142253B1008A0B5D /* MemorialClock.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		05B772AE142253B1008A0B5D /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 05B772B1142253B1008A0B5D /* Build configuration list for PBXProject "MemorialClock" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 05B772AC142253B1008A0B5D;
+			productRefGroup = 05B772B8142253B1008A0B5D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				05B772B6142253B1008A0B5D /* MemorialClock */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		05B772B5142253B1008A0B5D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05B772C6142253B1008A0B5D /* InfoPlist.strings in Resources */,
+				05B772CF142253B1008A0B5D /* MainWindow.xib in Resources */,
+				05B772D5142253B1008A0B5D /* MemorialClockViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		05B772B3142253B1008A0B5D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05B772C9142253B1008A0B5D /* main.m in Sources */,
+				05B772CC142253B1008A0B5D /* MemorialClockAppDelegate.m in Sources */,
+				05B772D2142253B1008A0B5D /* MemorialClockViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		05B772C4142253B1008A0B5D /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05B772C5142253B1008A0B5D /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		05B772CD142253B1008A0B5D /* MainWindow.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05B772CE142253B1008A0B5D /* en */,
+			);
+			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		05B772D3142253B1008A0B5D /* MemorialClockViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05B772D4142253B1008A0B5D /* en */,
+			);
+			name = MemorialClockViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		05B772D6142253B1008A0B5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = DEBUG;
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		05B772D7142253B1008A0B5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+			};
+			name = Release;
+		};
+		05B772D9142253B1008A0B5D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MemorialClock/MemorialClock-Prefix.pch";
+				INFOPLIST_FILE = "MemorialClock/MemorialClock-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		05B772DA142253B1008A0B5D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MemorialClock/MemorialClock-Prefix.pch";
+				INFOPLIST_FILE = "MemorialClock/MemorialClock-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				VALIDATE_PRODUCT = YES;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		05B772B1142253B1008A0B5D /* Build configuration list for PBXProject "MemorialClock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05B772D6142253B1008A0B5D /* Debug */,
+				05B772D7142253B1008A0B5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05B772D8142253B1008A0B5D /* Build configuration list for PBXNativeTarget "MemorialClock" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05B772D9142253B1008A0B5D /* Debug */,
+				05B772DA142253B1008A0B5D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 05B772AE142253B1008A0B5D /* Project object */;
+}
