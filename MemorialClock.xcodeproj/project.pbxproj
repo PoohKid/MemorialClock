@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0544728C1426904400392985 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 054472851426904400392985 /* RegisterViewController.xib */; };
+		0544728D1426904400392985 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472871426904400392985 /* RegisterViewController.m */; };
+		0544728E1426904400392985 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 054472891426904400392985 /* Icon.png */; };
+		0544728F1426904400392985 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 0544728A1426904400392985 /* Icon@2x.png */; };
+		054472901426904400392985 /* MemorialClock.db in Resources */ = {isa = PBXBuildFile; fileRef = 0544728B1426904400392985 /* MemorialClock.db */; };
+		054472A21426908600392985 /* MemoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472941426908600392985 /* MemoryModel.m */; };
+		054472A31426908600392985 /* NSDictionary+Null.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472961426908600392985 /* NSDictionary+Null.m */; };
+		054472A41426908600392985 /* FMDatabase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0544729A1426908600392985 /* FMDatabase.m */; };
+		054472A51426908600392985 /* FMDatabaseAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 0544729C1426908600392985 /* FMDatabaseAdditions.m */; };
+		054472A61426908600392985 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0544729E1426908600392985 /* FMResultSet.m */; };
+		054472A71426908600392985 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472A11426908600392985 /* UIPlaceHolderTextView.m */; };
+		054472A9142690DD00392985 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 054472A8142690DD00392985 /* libsqlite3.0.dylib */; };
 		05B772BC142253B1008A0B5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B772BB142253B1008A0B5D /* UIKit.framework */; };
 		05B772BE142253B1008A0B5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B772BD142253B1008A0B5D /* Foundation.framework */; };
 		05B772C0142253B1008A0B5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B772BF142253B1008A0B5D /* CoreGraphics.framework */; };
@@ -19,18 +31,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		054472851426904400392985 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
+		054472861426904400392985 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
+		054472871426904400392985 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
+		054472891426904400392985 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		0544728A1426904400392985 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		0544728B1426904400392985 /* MemorialClock.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = MemorialClock.db; sourceTree = "<group>"; };
+		054472931426908600392985 /* MemoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MemoryModel.h; sourceTree = "<group>"; };
+		054472941426908600392985 /* MemoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MemoryModel.m; sourceTree = "<group>"; };
+		054472951426908600392985 /* NSDictionary+Null.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSDictionary+Null.h"; sourceTree = "<group>"; };
+		054472961426908600392985 /* NSDictionary+Null.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSDictionary+Null.m"; sourceTree = "<group>"; };
+		054472991426908600392985 /* FMDatabase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabase.h; sourceTree = "<group>"; };
+		0544729A1426908600392985 /* FMDatabase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabase.m; sourceTree = "<group>"; };
+		0544729B1426908600392985 /* FMDatabaseAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMDatabaseAdditions.h; sourceTree = "<group>"; };
+		0544729C1426908600392985 /* FMDatabaseAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMDatabaseAdditions.m; sourceTree = "<group>"; };
+		0544729D1426908600392985 /* FMResultSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FMResultSet.h; sourceTree = "<group>"; };
+		0544729E1426908600392985 /* FMResultSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FMResultSet.m; sourceTree = "<group>"; };
+		054472A01426908600392985 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		054472A11426908600392985 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
+		054472A8142690DD00392985 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		05B772B7142253B1008A0B5D /* MemorialClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemorialClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B772BB142253B1008A0B5D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		05B772BD142253B1008A0B5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		05B772BF142253B1008A0B5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		05B772C3142253B1008A0B5D /* MemorialClock-Info.plist */ = {isa = PBXFileReference; path = "MemorialClock-Info.plist"; sourceTree = "<group>"; };
+		05B772C3142253B1008A0B5D /* MemorialClock-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "MemorialClock-Info.plist"; sourceTree = "<group>"; };
 		05B772C5142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		05B772C7142253B1008A0B5D /* MemorialClock-Prefix.pch */ = {isa = PBXFileReference; path = "MemorialClock-Prefix.pch"; sourceTree = "<group>"; };
+		05B772C7142253B1008A0B5D /* MemorialClock-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "MemorialClock-Prefix.pch"; sourceTree = "<group>"; };
 		05B772C8142253B1008A0B5D /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		05B772CA142253B1008A0B5D /* MemorialClockAppDelegate.h */ = {isa = PBXFileReference; path = MemorialClockAppDelegate.h; sourceTree = "<group>"; };
+		05B772CA142253B1008A0B5D /* MemorialClockAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemorialClockAppDelegate.h; sourceTree = "<group>"; };
 		05B772CB142253B1008A0B5D /* MemorialClockAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemorialClockAppDelegate.m; sourceTree = "<group>"; };
 		05B772CE142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
-		05B772D0142253B1008A0B5D /* MemorialClockViewController.h */ = {isa = PBXFileReference; path = MemorialClockViewController.h; sourceTree = "<group>"; };
+		05B772D0142253B1008A0B5D /* MemorialClockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemorialClockViewController.h; sourceTree = "<group>"; };
 		05B772D1142253B1008A0B5D /* MemorialClockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemorialClockViewController.m; sourceTree = "<group>"; };
 		05B772D4142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MemorialClockViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -40,6 +71,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054472A9142690DD00392985 /* libsqlite3.0.dylib in Frameworks */,
 				05B772BC142253B1008A0B5D /* UIKit.framework in Frameworks */,
 				05B772BE142253B1008A0B5D /* Foundation.framework in Frameworks */,
 				05B772C0142253B1008A0B5D /* CoreGraphics.framework in Frameworks */,
@@ -49,11 +81,72 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		054472881426904400392985 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				054472891426904400392985 /* Icon.png */,
+				0544728A1426904400392985 /* Icon@2x.png */,
+				0544728B1426904400392985 /* MemorialClock.db */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		054472911426908600392985 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				054472921426908600392985 /* Model */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		054472921426908600392985 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				054472951426908600392985 /* NSDictionary+Null.h */,
+				054472961426908600392985 /* NSDictionary+Null.m */,
+				054472931426908600392985 /* MemoryModel.h */,
+				054472941426908600392985 /* MemoryModel.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		054472971426908600392985 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				054472981426908600392985 /* FMDB */,
+				0544729F1426908600392985 /* UIPlaceHolderTextView */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		054472981426908600392985 /* FMDB */ = {
+			isa = PBXGroup;
+			children = (
+				054472991426908600392985 /* FMDatabase.h */,
+				0544729A1426908600392985 /* FMDatabase.m */,
+				0544729B1426908600392985 /* FMDatabaseAdditions.h */,
+				0544729C1426908600392985 /* FMDatabaseAdditions.m */,
+				0544729D1426908600392985 /* FMResultSet.h */,
+				0544729E1426908600392985 /* FMResultSet.m */,
+			);
+			path = FMDB;
+			sourceTree = "<group>";
+		};
+		0544729F1426908600392985 /* UIPlaceHolderTextView */ = {
+			isa = PBXGroup;
+			children = (
+				054472A01426908600392985 /* UIPlaceHolderTextView.h */,
+				054472A11426908600392985 /* UIPlaceHolderTextView.m */,
+			);
+			path = UIPlaceHolderTextView;
+			sourceTree = "<group>";
+		};
 		05B772AC142253B1008A0B5D = {
 			isa = PBXGroup;
 			children = (
 				05B772C1142253B1008A0B5D /* MemorialClock */,
 				05B772BA142253B1008A0B5D /* Frameworks */,
+				054472A8142690DD00392985 /* libsqlite3.0.dylib */,
 				05B772B8142253B1008A0B5D /* Products */,
 			);
 			sourceTree = "<group>";
@@ -79,13 +172,19 @@
 		05B772C1142253B1008A0B5D /* MemorialClock */ = {
 			isa = PBXGroup;
 			children = (
+				054472971426908600392985 /* Libraries */,
+				054472911426908600392985 /* Classes */,
 				05B772CA142253B1008A0B5D /* MemorialClockAppDelegate.h */,
 				05B772CB142253B1008A0B5D /* MemorialClockAppDelegate.m */,
 				05B772CD142253B1008A0B5D /* MainWindow.xib */,
 				05B772D0142253B1008A0B5D /* MemorialClockViewController.h */,
 				05B772D1142253B1008A0B5D /* MemorialClockViewController.m */,
 				05B772D3142253B1008A0B5D /* MemorialClockViewController.xib */,
+				054472861426904400392985 /* RegisterViewController.h */,
+				054472871426904400392985 /* RegisterViewController.m */,
+				054472851426904400392985 /* RegisterViewController.xib */,
 				05B772C2142253B1008A0B5D /* Supporting Files */,
+				054472881426904400392985 /* Resources */,
 			);
 			path = MemorialClock;
 			sourceTree = "<group>";
@@ -151,6 +250,10 @@
 				05B772C6142253B1008A0B5D /* InfoPlist.strings in Resources */,
 				05B772CF142253B1008A0B5D /* MainWindow.xib in Resources */,
 				05B772D5142253B1008A0B5D /* MemorialClockViewController.xib in Resources */,
+				0544728C1426904400392985 /* RegisterViewController.xib in Resources */,
+				0544728E1426904400392985 /* Icon.png in Resources */,
+				0544728F1426904400392985 /* Icon@2x.png in Resources */,
+				054472901426904400392985 /* MemorialClock.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +267,13 @@
 				05B772C9142253B1008A0B5D /* main.m in Sources */,
 				05B772CC142253B1008A0B5D /* MemorialClockAppDelegate.m in Sources */,
 				05B772D2142253B1008A0B5D /* MemorialClockViewController.m in Sources */,
+				0544728D1426904400392985 /* RegisterViewController.m in Sources */,
+				054472A21426908600392985 /* MemoryModel.m in Sources */,
+				054472A31426908600392985 /* NSDictionary+Null.m in Sources */,
+				054472A41426908600392985 /* FMDatabase.m in Sources */,
+				054472A51426908600392985 /* FMDatabaseAdditions.m in Sources */,
+				054472A61426908600392985 /* FMResultSet.m in Sources */,
+				054472A71426908600392985 /* UIPlaceHolderTextView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +386,7 @@
 				05B772DA142253B1008A0B5D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

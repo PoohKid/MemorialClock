@@ -12,4 +12,6 @@
     
 }
 
+- (IBAction)tapAddButton:(id)sender;
+
 @end

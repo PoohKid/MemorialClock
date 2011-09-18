@@ -7,6 +7,7 @@
 //
 
 #import "MemorialClockViewController.h"
+#import "RegisterViewController.h"
 
 @implementation MemorialClockViewController
 
@@ -43,7 +44,18 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
     // Return YES for supported orientations
-    return (interfaceOrientation == UIInterfaceOrientationPortrait);
+    return (interfaceOrientation == UIInterfaceOrientationPortrait ||
+            interfaceOrientation == UIInterfaceOrientationPortraitUpsideDown);
+}
+
+#pragma mark - IBAction
+
+- (IBAction)tapAddButton:(id)sender
+{
+    RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+    registerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    [self presentModalViewController:registerViewController animated:YES];
+    [registerViewController release];
 }
 
 @end
