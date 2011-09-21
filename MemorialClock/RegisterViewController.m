@@ -10,6 +10,7 @@
 #import "UIPlaceHolderTextView.h"
 #import "MemoryModel.h"
 
+
 typedef enum {
     ActionSheetTypeCameraEnable,
     ActionSheetTypeCameraDisable,
@@ -219,6 +220,17 @@ typedef enum {
                     [alertView release];
                 } else {
                     //change
+                    [[MemoryModel sharedMemoryModel] changeMemory:self.memoryId
+                                                             name:nameTextField.text
+                                                          message:messageTextView.text
+                                                            image:photoView.image];
+                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+                                                                        message:@"Saved"
+                                                                       delegate:nil
+                                                              cancelButtonTitle:@"OK"
+                                                              otherButtonTitles:nil];
+                    [alertView show];
+                    [alertView release];
                 }
                 break;
             case 1: //Send Mail
@@ -236,8 +248,26 @@ typedef enum {
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
     [self dismissModalViewControllerAnimated:YES];
-    self.photoImage = image;
-    photoView.image = image;
+
+    //NSLog(@"%f, %f", image.size.width, image.size.height); //カメラ撮影時: 1536.000000, 2048.000000
+
+    //iPad/iPad 2   1024x768    iPhoneと縦横比が異なる / ただしカメラ撮影と縦横比が同じ
+    //Retina        960x640
+    //iPhone 3G/3GS 480x320
+
+    //画像リサイズ（iPadに合わせる）
+    //  理由1.画面に表示するだけならオリジナルサイズは要らないので、サイズを縮小する
+    //  理由2.カメラ撮影時、UIImage->NSData->ファイルに保存->UIImageで90度左に回転する現象を、drawInRect:をはさむことで解消する
+
+    size_t resize_w = 768; //iPad(portrait)横の値で固定
+    size_t resize_h = floor(resize_w * image.size.height / image.size.width);
+    //NSLog(@"%lu, %lu", resize_w, resize_h); //768, 1024
+
+    UIGraphicsBeginImageContext(CGSizeMake(resize_w, resize_h));
+    [image drawInRect:CGRectMake(0, 0, resize_w, resize_h)];
+    self.photoImage = UIGraphicsGetImageFromCurrentImageContext();
+    photoView.image = self.photoImage;
+    UIGraphicsEndImageContext();
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker

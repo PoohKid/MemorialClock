@@ -52,10 +52,10 @@ static MemoryModel *sharedMemoryModel_ = nil;
     dbPath_ = [[[documentPaths objectAtIndex:0] stringByAppendingPathComponent:kDBName] retain];
 
     NSFileManager *fileManager = [NSFileManager defaultManager];
-    //debug用に毎回消す
-    if ([fileManager fileExistsAtPath:dbPath_]) {
-        [fileManager removeItemAtPath:dbPath_ error:nil];
-    }
+    ////debug用に毎回消す
+    //if ([fileManager fileExistsAtPath:dbPath_]) {
+    //    [fileManager removeItemAtPath:dbPath_ error:nil];
+    //}
     if ([fileManager fileExistsAtPath:dbPath_] == NO) {
         NSError *error;
         if ([fileManager copyItemAtPath:resourcePath toPath:dbPath_ error:&error] == NO) {
@@ -109,13 +109,14 @@ static MemoryModel *sharedMemoryModel_ = nil;
     } else {
         NSLog(@"Could not open db.");
     }
-    //NSLog(@"memoryIdList: %@", memoryIdList);
+    NSLog(@"memoryIdList: %@", memoryIdList);
 
     return memoryIdList;
 }
 
 - (int)nextMemoryId
 {
+    int loopCheck = 0;
     int memoryId = 0;
     switch ([memoryIdList_ count]) {
         case 0:
@@ -126,13 +127,21 @@ static MemoryModel *sharedMemoryModel_ = nil;
             break;
         default: //2-
             do {
-                //乱数で前回と違う値を設定
-                memoryId = 0;
-                break;
+                loopCheck ++;
+                if (loopCheck > 100) {
+                    assert(NO); //DEBUG時はassert()
+                    break;      //RELEASE時はbreak;
+                }
+                int min = 0;
+                int max = [memoryIdList_ count] - 1;
+                int idx = min + (int)(rand() * (max - min + 1.0) / (1.0 + RAND_MAX));
+                memoryId = [[memoryIdList_ objectAtIndex:idx] intValue];
             } while (prevMemoryId_ == memoryId);
             break;
     }
     prevMemoryId_ = memoryId;
+    //NSLog(@"memoryId: %d", memoryId);
+
     return memoryId;
 }
 
@@ -150,7 +159,7 @@ static MemoryModel *sharedMemoryModel_ = nil;
 #pragma mark -- public methods --
 //--------------------------------------------------------------//
 
-- (NSDictionary *)memory
+- (NSDictionary *)nextMemory
 {
     NSMutableDictionary *memory = [[NSMutableDictionary alloc] initWithCapacity:5];
     [memory setObject:[NSNumber numberWithInt:0] forKey:@"memory_id"];
@@ -235,7 +244,7 @@ static MemoryModel *sharedMemoryModel_ = nil;
 
         //画像保存
         NSString *imagePath = [self imagePath:memoryId];
-        NSData *imageData = UIImagePNGRepresentation(image);
+        NSData *imageData = UIImageJPEGRepresentation(image, 1.0f); //写真の場合、PNGだとサイズが大きくなるためJPEGを適用
         [imageData writeToFile:imagePath atomically:YES];
 
         [db commit];
@@ -248,6 +257,46 @@ static MemoryModel *sharedMemoryModel_ = nil;
     [memoryIdList_ release], memoryIdList_ = [[self memoryIdList] retain];
 
     return memoryId;
+}
+
+- (void)changeMemory:(int)memoryId name:(NSString *)name message:(NSString *)message image:(UIImage *)image
+{
+    NSString *updateMemory =
+    @"UPDATE memory "
+    @"SET "
+    @"  name = ?, "
+    @"  message = ? "
+    @"WHERE memory_id = ? ";
+    //NSLog(@"updateMemory: %@", updateMemory);
+
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath_];
+    if ([db open]) {
+        [db setShouldCacheStatements:YES];
+        [db beginTransaction];
+
+        //memoryレコード登録
+        [db executeUpdate:updateMemory,
+         name,
+         message,
+         [NSNumber numberWithInt:memoryId]];
+        if ([db hadError]) {
+            NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        }
+
+        //画像保存
+        NSString *imagePath = [self imagePath:memoryId];
+        NSData *imageData = UIImageJPEGRepresentation(image, 1.0f); //写真の場合、PNGだとサイズが大きくなるためJPEGを適用
+        [imageData writeToFile:imagePath atomically:YES];
+
+        [db commit];
+        [db close];
+    } else {
+        NSLog(@"Could not open db.");
+    }
+}
+
+- (void)removeMemory:(int)memoryId
+{
 }
 
 //--------------------------------------------------------------//

@@ -19,6 +19,8 @@
 		054472A61426908600392985 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0544729E1426908600392985 /* FMResultSet.m */; };
 		054472A71426908600392985 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472A11426908600392985 /* UIPlaceHolderTextView.m */; };
 		054472A9142690DD00392985 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 054472A8142690DD00392985 /* libsqlite3.0.dylib */; };
+		055774F81429FABD00B28746 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 055774F71429FABD00B28746 /* README.md */; };
+		059844B11428F77C0079A1E1 /* MemorialClockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059844B21428F77C0079A1E1 /* MemorialClockViewController.xib */; };
 		05B772BC142253B1008A0B5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B772BB142253B1008A0B5D /* UIKit.framework */; };
 		05B772BE142253B1008A0B5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B772BD142253B1008A0B5D /* Foundation.framework */; };
 		05B772C0142253B1008A0B5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05B772BF142253B1008A0B5D /* CoreGraphics.framework */; };
@@ -27,7 +29,6 @@
 		05B772CC142253B1008A0B5D /* MemorialClockAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B772CB142253B1008A0B5D /* MemorialClockAppDelegate.m */; };
 		05B772CF142253B1008A0B5D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B772CD142253B1008A0B5D /* MainWindow.xib */; };
 		05B772D2142253B1008A0B5D /* MemorialClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B772D1142253B1008A0B5D /* MemorialClockViewController.m */; };
-		05B772D5142253B1008A0B5D /* MemorialClockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B772D3142253B1008A0B5D /* MemorialClockViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,8 @@
 		054472A01426908600392985 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		054472A11426908600392985 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		054472A8142690DD00392985 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		055774F71429FABD00B28746 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
+		059844B21428F77C0079A1E1 /* MemorialClockViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemorialClockViewController.xib; sourceTree = "<group>"; };
 		05B772B7142253B1008A0B5D /* MemorialClock.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemorialClock.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		05B772BB142253B1008A0B5D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		05B772BD142253B1008A0B5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -63,7 +66,6 @@
 		05B772CE142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		05B772D0142253B1008A0B5D /* MemorialClockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemorialClockViewController.h; sourceTree = "<group>"; };
 		05B772D1142253B1008A0B5D /* MemorialClockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemorialClockViewController.m; sourceTree = "<group>"; };
-		05B772D4142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MemorialClockViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,6 +174,7 @@
 		05B772C1142253B1008A0B5D /* MemorialClock */ = {
 			isa = PBXGroup;
 			children = (
+				055774F71429FABD00B28746 /* README.md */,
 				054472971426908600392985 /* Libraries */,
 				054472911426908600392985 /* Classes */,
 				05B772CA142253B1008A0B5D /* MemorialClockAppDelegate.h */,
@@ -179,7 +182,7 @@
 				05B772CD142253B1008A0B5D /* MainWindow.xib */,
 				05B772D0142253B1008A0B5D /* MemorialClockViewController.h */,
 				05B772D1142253B1008A0B5D /* MemorialClockViewController.m */,
-				05B772D3142253B1008A0B5D /* MemorialClockViewController.xib */,
+				059844B21428F77C0079A1E1 /* MemorialClockViewController.xib */,
 				054472861426904400392985 /* RegisterViewController.h */,
 				054472871426904400392985 /* RegisterViewController.m */,
 				054472851426904400392985 /* RegisterViewController.xib */,
@@ -249,11 +252,12 @@
 			files = (
 				05B772C6142253B1008A0B5D /* InfoPlist.strings in Resources */,
 				05B772CF142253B1008A0B5D /* MainWindow.xib in Resources */,
-				05B772D5142253B1008A0B5D /* MemorialClockViewController.xib in Resources */,
+				059844B11428F77C0079A1E1 /* MemorialClockViewController.xib in Resources */,
 				0544728C1426904400392985 /* RegisterViewController.xib in Resources */,
 				0544728E1426904400392985 /* Icon.png in Resources */,
 				0544728F1426904400392985 /* Icon@2x.png in Resources */,
 				054472901426904400392985 /* MemorialClock.db in Resources */,
+				055774F81429FABD00B28746 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -294,14 +298,6 @@
 				05B772CE142253B1008A0B5D /* en */,
 			);
 			name = MainWindow.xib;
-			sourceTree = "<group>";
-		};
-		05B772D3142253B1008A0B5D /* MemorialClockViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				05B772D4142253B1008A0B5D /* en */,
-			);
-			name = MemorialClockViewController.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

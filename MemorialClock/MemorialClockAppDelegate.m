@@ -21,8 +21,12 @@
 {
     // Override point for customization after application launch.
      
+    //乱数初期化
+    srand([[NSDate date] timeIntervalSinceReferenceDate]);
+
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+
     return YES;
 }
 

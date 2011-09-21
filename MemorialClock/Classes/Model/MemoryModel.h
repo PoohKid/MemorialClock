@@ -17,7 +17,9 @@
 
 + (MemoryModel *)sharedMemoryModel;
 
-- (NSDictionary *)memory;
+- (NSDictionary *)nextMemory;
 - (int)addMemory:(NSString *)name message:(NSString *)message image:(UIImage *)image;
+- (void)changeMemory:(int)memoryId name:(NSString *)name message:(NSString *)message image:(UIImage *)image;
+- (void)removeMemory:(int)memoryId;
 
 @end
