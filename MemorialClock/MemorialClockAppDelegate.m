@@ -24,6 +24,9 @@
     //乱数初期化
     srand([[NSDate date] timeIntervalSinceReferenceDate]);
 
+    //自動ロックをOFF
+    [UIApplication sharedApplication].idleTimerDisabled = YES;
+
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
 
