@@ -76,6 +76,10 @@ typedef enum {
     messageTextView.placeholderColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChanged:) name:UITextViewTextDidChangeNotification object:nil];
 
+    //フォント設定
+    nameTextField.font = [UIFont fontWithName:@"Noteworthy-Bold" size:nameTextField.font.pointSize];
+    messageTextView.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageTextView.font.pointSize];
+
     //キーボード表示
     [nameTextField becomeFirstResponder];
 }

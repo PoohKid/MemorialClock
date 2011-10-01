@@ -97,6 +97,10 @@
     photoPane1.alpha = 0;
     photoPane2.alpha = 0;
 
+    //フォント設定（Interface Builderから指定しても反映されないためコード上で設定）ChalkboardSE -> Noteworthy
+    messageLabel1.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize];
+    messageLabel2.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel2.font.pointSize];
+
     [prevHHmm_ release], prevHHmm_ = nil;
     [timer_ invalidate];
     [timer_ release];
