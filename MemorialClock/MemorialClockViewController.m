@@ -185,6 +185,14 @@
 //    UIView *messageBackground = isViewFirst_ ? messageBackground2 : messageBackground1;
     UILabel *messageLabel =     isViewFirst_ ? messageLabel2 : messageLabel1;
 
+    //縦向きの場合はAspectFill、横向きの場合はAspectFit（標準のアルバムと同じ、はず）
+    if (image.size.height > image.size.width) {
+        //Portrait
+        photoView.contentMode = UIViewContentModeScaleAspectFill;
+    } else {
+        //Landscape
+        photoView.contentMode = UIViewContentModeScaleAspectFit;
+    }
     photoView.image = image;
 //    messageBackground; //大きさを変える
     messageLabel.text = [NSString stringWithFormat:@"%@\n\n%@", name, message];

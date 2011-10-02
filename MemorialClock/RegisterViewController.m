@@ -270,6 +270,7 @@ typedef enum {
     UIGraphicsBeginImageContext(CGSizeMake(resize_w, resize_h));
     [image drawInRect:CGRectMake(0, 0, resize_w, resize_h)];
     self.photoImage = UIGraphicsGetImageFromCurrentImageContext();
+    photoView.contentMode = (self.photoImage.size.height > self.photoImage.size.width) ? UIViewContentModeScaleAspectFill : UIViewContentModeScaleAspectFit;
     photoView.image = self.photoImage;
     UIGraphicsEndImageContext();
 }
