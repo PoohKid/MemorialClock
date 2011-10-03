@@ -6,9 +6,11 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "MemorialClockAppDelegate.h"
 #import "RegisterViewController.h"
 #import "UIPlaceHolderTextView.h"
 #import "MemoryModel.h"
+#import "NSString+Escape.h"
 
 
 typedef enum {
@@ -121,36 +123,35 @@ typedef enum {
     //Twitter
     //Take Photo or Video..., Choose from Library...
     //写真やビデオを撮る..., ライブラリから選択...
-    UIActionSheet *actionSheet;
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                  delegate:self
-                                         cancelButtonTitle:@"Cancel"
-                                    destructiveButtonTitle:nil
-                                         otherButtonTitles:@"Take Photo", @"Choose from Library", nil];
-        actionSheet.tag = ActionSheetTypeCameraEnable;
+        appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Cancel"
+                                                 destructiveButtonTitle:nil
+                                                      otherButtonTitles:@"Take Photo", @"Choose from Library", nil] autorelease];
+        appDelegate.actionSheet.tag = ActionSheetTypeCameraEnable;
     } else {
-        actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                  delegate:self
-                                         cancelButtonTitle:@"Cancel"
-                                    destructiveButtonTitle:nil
-                                         otherButtonTitles:@"Choose from Library", nil];
-        actionSheet.tag = ActionSheetTypeCameraDisable;
+        appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
+                                                               delegate:self
+                                                      cancelButtonTitle:@"Cancel"
+                                                 destructiveButtonTitle:nil
+                                                      otherButtonTitles:@"Choose from Library", nil] autorelease];
+        appDelegate.actionSheet.tag = ActionSheetTypeCameraDisable;
     }
-    [actionSheet showInView:self.view];
-    [actionSheet release];
+    [appDelegate.actionSheet showInView:self.view];
 }
 
 - (IBAction)tapActionButton:(id)sender
 {
-    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
-                                                             delegate:self
-                                                    cancelButtonTitle:@"Cancel"
-                                               destructiveButtonTitle:nil
-                                                    otherButtonTitles:@"Save", @"Send Mail", nil];
-    actionSheet.tag = ActionSheetTypeAction;
-    [actionSheet showInView:self.view];
-    [actionSheet release];
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                             destructiveButtonTitle:nil
+                                                  otherButtonTitles:@"Save", @"Send Mail", nil] autorelease];
+    appDelegate.actionSheet.tag = ActionSheetTypeAction;
+    [appDelegate.actionSheet showInView:self.view];
 }
 
 #pragma mark - UITextFieldTextDidChangeNotification
@@ -167,10 +168,20 @@ typedef enum {
     self.message = messageTextView.text;
 }
 
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.alertView = nil;
+}
+
 #pragma mark - UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
     if (actionSheet.tag == ActionSheetTypeCameraEnable ||
         actionSheet.tag == ActionSheetTypeCameraDisable) {
 
@@ -185,7 +196,7 @@ typedef enum {
                         sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                         break;
                     default: //Cancel
-                        return;
+                        break;
                 }
                 break;
             case ActionSheetTypeCameraDisable:
@@ -194,18 +205,17 @@ typedef enum {
                         sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                         break;
                     default: //Cancel
-                        return;
+                        break;
                 }
                 break;
         }
-        if ([UIImagePickerController isSourceTypeAvailable:sourceType] == NO) {
-            return;
+        if ([UIImagePickerController isSourceTypeAvailable:sourceType]) {
+            UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
+            imagePickerController.sourceType = sourceType;
+            imagePickerController.delegate = self;
+            [self presentModalViewController:imagePickerController animated:YES];
+            [imagePickerController release];
         }
-        UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
-        imagePickerController.sourceType = sourceType;
-        imagePickerController.delegate = self;
-        [self presentModalViewController:imagePickerController animated:YES];
-        [imagePickerController release];
 
     } else if (actionSheet.tag == ActionSheetTypeAction) {
         switch (buttonIndex) {
@@ -215,36 +225,71 @@ typedef enum {
                     self.memoryId = [[MemoryModel sharedMemoryModel] addMemory:nameTextField.text
                                                                        message:messageTextView.text
                                                                          image:photoView.image];
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                        message:@"Saved"
-                                                                       delegate:nil
-                                                              cancelButtonTitle:@"OK"
-                                                              otherButtonTitles:nil];
-                    [alertView show];
-                    [alertView release];
                 } else {
                     //change
                     [[MemoryModel sharedMemoryModel] changeMemory:self.memoryId
                                                              name:nameTextField.text
                                                           message:messageTextView.text
                                                             image:photoView.image];
-                    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
-                                                                        message:@"Saved"
-                                                                       delegate:nil
-                                                              cancelButtonTitle:@"OK"
-                                                              otherButtonTitles:nil];
-                    [alertView show];
-                    [alertView release];
                 }
+                appDelegate.alertView = [[[UIAlertView alloc] initWithTitle:nil
+                                                                    message:@"Saved"
+                                                                   delegate:self
+                                                          cancelButtonTitle:@"OK"
+                                                          otherButtonTitles:nil] autorelease];
+                [appDelegate.alertView show];
                 break;
             case 1: //Send Mail
+                {
+                    MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
+                    mailComposeViewController.mailComposeDelegate = self;
+
+                    //メールタイトル設定
+                    [mailComposeViewController setSubject:@"OurMemories"]; //卒業時計
+
+                    //メール本文を設定
+                    NSString *messageBody;
+                    if (photoView.image) {
+                        messageBody = [NSString stringWithFormat:
+                                       @"Happy Graduation!\n"                                   //卒業おめでとう！
+                                       @"\n"
+                                       @"Please save your photo album first.\n"                 //まず写真をアルバムに保存してください。
+                                       @"\n"
+                                       @"Please click the link below and then.\n"               //その後で下のリンクをクリックしてください。
+                                       @"Then \"OurMemories\" open the registration screen.\n"  //すると"卒業時計"の登録画面が開きます。
+                                       @"\n"
+                                       @"memorialclock:///regist?name=%@&message=%@\n",
+                                       [nameTextField.text escapeString], [messageTextView.text escapeString]];
+                    } else {
+                        messageBody = [NSString stringWithFormat:
+                                       @"Happy Graduation!\n"                                   //卒業おめでとう！
+                                       @"\n"
+                                       @"Please click the link below.\n"                        //下のリンクをクリックしてください。
+                                       @"Then \"OurMemories\" open the registration screen.\n"  //すると"卒業時計"の登録画面が開きます。
+                                       @"\n"
+                                       @"memorialclock:///regist?name=%@&message=%@\n",
+                                       [nameTextField.text escapeString], [messageTextView.text escapeString]];
+                    }
+                    [mailComposeViewController setMessageBody:messageBody isHTML:NO];
+
+                    //画像を添付
+                    if (photoView.image) {
+                        NSData *data = [[NSData alloc] initWithData:UIImageJPEGRepresentation(photoView.image, 1.0f)];
+                        [mailComposeViewController addAttachmentData:data mimeType:@"image/jpg" fileName:@"photo"];
+                        [data release];
+                    }
+
+                    //MFMailComposeViewController表示
+                    [self presentModalViewController:mailComposeViewController animated:YES];
+                    [mailComposeViewController release];
+                }
                 break;
             default: //Cancel
-                return;
+                break;
         }
-    } else {
-        return;
     }
+
+    appDelegate.actionSheet = nil; //必ず呼ばれること！！
 }
 
 #pragma mark - UIImagePickerControllerDelegate
@@ -276,6 +321,13 @@ typedef enum {
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - MFMailComposeViewControllerDelegate
+
+- (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     [self dismissModalViewControllerAnimated:YES];
 }

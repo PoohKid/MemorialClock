@@ -9,6 +9,8 @@
 #import "MemorialClockAppDelegate.h"
 
 #import "MemorialClockViewController.h"
+#import "RegisterViewController.h"
+#import "NSString+Escape.h"
 
 @implementation MemorialClockAppDelegate
 
@@ -17,18 +19,68 @@
 
 @synthesize viewController=_viewController;
 
+@synthesize alertView, actionSheet;
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-     
-    //乱数初期化
-    srand([[NSDate date] timeIntervalSinceReferenceDate]);
 
     //自動ロックをOFF
     [UIApplication sharedApplication].idleTimerDisabled = YES;
 
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
+
+    return YES;
+}
+
+//クエリ文字列を解析
+- (NSDictionary *)parseQueryString:(NSString *)query {
+    NSMutableDictionary *dict = [[[NSMutableDictionary alloc] initWithCapacity:6] autorelease];
+    NSArray *pairs = [query componentsSeparatedByString:@"&"];
+
+    for (NSString *pair in pairs) {
+        NSArray *elements = [pair componentsSeparatedByString:@"="];
+        NSString *key = [[elements objectAtIndex:0] unescapeString];
+        NSString *val = [[elements objectAtIndex:1] unescapeString];
+
+        [dict setObject:val forKey:key];
+    }
+    //NSLog(@"dict: %@", dict);
+    return dict;
+}
+
+//URLスキームを受信
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    //コマンド取得
+    NSString *command = nil;
+    NSArray *pathComponents = [url pathComponents]; // "/", "command"
+    if ([pathComponents count] == 2) {
+        command = [pathComponents objectAtIndex:1];
+    }
+    //クエリ文字列を解析
+    NSDictionary *query = [self parseQueryString:[url query]];
+
+    if ([command isEqualToString:@"regist"]) {
+        //AlertViewを閉じる
+        [self.alertView dismissWithClickedButtonIndex:self.alertView.cancelButtonIndex animated:NO];
+        self.alertView = nil;
+        //ActionSheetを閉じる
+        [self.actionSheet dismissWithClickedButtonIndex:self.actionSheet.cancelButtonIndex animated:NO];
+        self.actionSheet = nil;
+
+        //モーダル遷移を閉じる（チェーン内のすべてのオブジェクトを閉じる）
+        [self.window.rootViewController dismissModalViewControllerAnimated:NO];
+
+        //登録画面を開く
+        RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+        registerViewController.name = [query objectForKey:@"name"];
+        registerViewController.message = [query objectForKey:@"message"];
+        registerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+        [self.window.rootViewController presentModalViewController:registerViewController animated:NO];
+        [registerViewController release];
+    }
 
     return YES;
 }

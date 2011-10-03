@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MemorialClockViewController : UIViewController {
+@interface MemorialClockViewController : UIViewController <UIAlertViewDelegate> {
     NSTimer *timer_;
     NSString *prevHHmm_;
 

@@ -6,6 +6,7 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import "MemorialClockAppDelegate.h"
 #import "MemorialClockViewController.h"
 #import "RegisterViewController.h"
 #import "MemoryModel.h"
@@ -221,13 +222,13 @@
     if (error) {
         NSLog(@"%@", [error localizedDescription]);
     }
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:nil
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.alertView = [[[UIAlertView alloc] initWithTitle:nil
                                                         message:error ? @"Failed" : @"Saved"
-                                                       delegate:nil
+                                                       delegate:self
                                               cancelButtonTitle:@"OK"
-                                              otherButtonTitles:nil];
-    [alertView show];
-    [alertView release];
+                                              otherButtonTitles:nil] autorelease];
+    [appDelegate.alertView show];
 }
 
 - (IBAction)tapSaveButton:(id)sender
@@ -244,15 +245,28 @@
 - (IBAction)tapEditButton:(id)sender
 {
     RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
-
     registerViewController.memoryId = currentMemoryId_;
     registerViewController.photoImage = currentImage_;
     registerViewController.name = currentName_;
     registerViewController.message = currentMessage_;
-
     registerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentModalViewController:registerViewController animated:YES];
     [registerViewController release];
 }
+
+#pragma mark - UIAlertViewDelegate
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.alertView = nil;
+}
+
+/*
+- (void)alertViewCancel:(UIAlertView *)alertView
+{
+    NSLog(@"alertViewCancel");
+}
+*/
 
 @end

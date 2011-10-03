@@ -11,11 +11,15 @@
 @class MemorialClockViewController;
 
 @interface MemorialClockAppDelegate : NSObject <UIApplicationDelegate> {
-
+    UIAlertView *alertView;
+    UIActionSheet *actionSheet;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
 
 @property (nonatomic, retain) IBOutlet MemorialClockViewController *viewController;
+
+@property (nonatomic, retain) UIAlertView *alertView;
+@property (nonatomic, retain) UIActionSheet *actionSheet;
 
 @end

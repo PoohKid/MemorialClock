@@ -132,9 +132,7 @@ static MemoryModel *sharedMemoryModel_ = nil;
                     assert(NO); //DEBUG時はassert()
                     break;      //RELEASE時はbreak;
                 }
-                int min = 0;
-                int max = [memoryIdList_ count] - 1;
-                int idx = min + (int)(rand() * (max - min + 1.0) / (1.0 + RAND_MAX));
+                int idx = arc4random() % [memoryIdList_ count];
                 memoryId = [[memoryIdList_ objectAtIndex:idx] intValue];
             } while (prevMemoryId_ == memoryId);
             break;
@@ -161,7 +159,7 @@ static MemoryModel *sharedMemoryModel_ = nil;
 
 - (NSDictionary *)nextMemory
 {
-    NSMutableDictionary *memory = [[NSMutableDictionary alloc] initWithCapacity:5];
+    NSMutableDictionary *memory = [[[NSMutableDictionary alloc] initWithCapacity:5] autorelease];
     [memory setObject:[NSNumber numberWithInt:0] forKey:@"memory_id"];
     [memory setObjectNull:nil forKey:@"name"];
     [memory setObjectNull:nil forKey:@"message"];
@@ -203,7 +201,7 @@ static MemoryModel *sharedMemoryModel_ = nil;
 
 - (int)addMemory:(NSString *)name message:(NSString *)message image:(UIImage *)image
 {
-    int memoryId;
+    int memoryId = 0;
 
     NSString *insertMemory =
     @"INSERT INTO memory ( "
