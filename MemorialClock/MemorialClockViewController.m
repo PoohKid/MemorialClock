@@ -6,6 +6,8 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
+#import <QuartzCore/QuartzCore.h>
+
 #import "MemorialClockAppDelegate.h"
 #import "MemorialClockViewController.h"
 #import "RegisterViewController.h"
@@ -98,6 +100,10 @@
     photoPane1.alpha = 0;
     photoPane2.alpha = 0;
 
+    //角丸設定
+    messageBackground1.layer.cornerRadius = 10;
+    messageBackground2.layer.cornerRadius = 10;
+
     //フォント設定（Interface Builderから指定しても反映されないためコード上で設定）ChalkboardSE -> Noteworthy
     messageLabel1.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize];
     messageLabel2.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel2.font.pointSize];
@@ -185,7 +191,7 @@
     UIView *photoPaneFrom =     isViewFirst_ ? photoPane1 : photoPane2;
     UIView *photoPaneTo =       isViewFirst_ ? photoPane2 : photoPane1;
     UIImageView *photoView =    isViewFirst_ ? photoView2 : photoView1;
-//    UIView *messageBackground = isViewFirst_ ? messageBackground2 : messageBackground1;
+    UIView *messageBackground = isViewFirst_ ? messageBackground2 : messageBackground1;
     UILabel *messageLabel =     isViewFirst_ ? messageLabel2 : messageLabel1;
 
     //縦向きの場合はAspectFill、横向きの場合はAspectFit（標準のアルバムと同じ、はず）
@@ -197,8 +203,39 @@
         photoView.contentMode = UIViewContentModeScaleAspectFit;
     }
     photoView.image = image;
-//    messageBackground; //大きさを変える
-    messageLabel.text = [NSString stringWithFormat:@"%@\n\n%@", name, message];
+
+    //メッセージ表示内容を作成
+    NSString *messageString = nil;
+    if (NO) {
+    } else if ([name length] > 0 && [message length] > 0) {
+        messageString = [NSString stringWithFormat:@"%@\n\n%@", name, message]; //name + message
+    } else if ([name length] > 0) {
+        messageString = [NSString stringWithFormat:@"%@", name];    //name のみ
+    } else if ([message length] > 0) {
+        messageString = [NSString stringWithFormat:@"%@", message]; //message のみ
+    }
+
+    //メッセージsizeおよび内容を設定、表示／非表示を切り替え
+    if (messageString) {
+        //デザイン時
+        //background: (20, 166) - 280 x 200 / 366 (ToolBar: 386)
+        //message:    (40, 186) - 240 x 160 / 346
+
+        CGSize size = [messageString sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(240, 160)];
+        messageBackground.frame = CGRectMake((photoContainer.frame.size.width - (size.width + 40)) / 2,
+                                             366 - (size.height + 40),
+                                             size.width + 40, size.height + 40);
+        messageLabel.frame = CGRectMake((photoContainer.frame.size.width - size.width) / 2,
+                                        346 - size.height,
+                                        size.width, size.height);
+        messageLabel.text = messageString;
+        messageBackground.alpha = 0.5;
+        messageLabel.alpha = 1;
+    } else {
+        messageLabel.text = messageString;
+        messageBackground.alpha = 0;
+        messageLabel.alpha = 0;
+    }
 
     [UIView animateWithDuration:0.5f
                      animations:^{
