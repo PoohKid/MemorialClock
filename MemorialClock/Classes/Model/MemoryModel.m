@@ -193,6 +193,8 @@ static MemoryModel *sharedMemoryModel_ = nil;
         } else {
             NSLog(@"Could not open db.");
         }
+    } else {
+        [memory setObjectNull:[UIImage imageNamed:@"howToUse.png"] forKey:@"image"];
     }
     //NSLog(@"memory: %@", memory);
 

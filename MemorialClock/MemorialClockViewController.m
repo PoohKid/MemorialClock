@@ -92,7 +92,7 @@
     self.title = @""; //UINavigationItemをOutletするとタイトルに反映されるようになる, nilだとデフォルト表示
 
     //初期化
-    currentMemoryId_ = 0;
+    currentMemoryId_ = -1; //0はデフォルト画像
     isViewFirst_ = YES;
 
     photoPane1.alpha = 0;
@@ -161,6 +161,7 @@
     NSString *message = [memory objectForKeyNull:@"message"];
     UIImage *image = [memory objectForKeyNull:@"image"];
 
+    /*
     if (memoryId == 0) {
         //表示なし
         currentMemoryId_ = memoryId;
@@ -171,6 +172,7 @@
         photoPane2.alpha = 0;
         return;
     }
+    */
     if (memoryId == currentMemoryId_) {
         //同一のため変更なし
         return;
