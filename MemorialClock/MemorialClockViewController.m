@@ -100,13 +100,31 @@
     photoPane1.alpha = 0;
     photoPane2.alpha = 0;
 
-    //角丸設定
-    messageBackground1.layer.cornerRadius = 10;
-    messageBackground2.layer.cornerRadius = 10;
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        //角丸設定
+        messageBackground1.layer.cornerRadius = 20;
+        messageBackground2.layer.cornerRadius = 20;
 
-    //フォント設定（Interface Builderから指定しても反映されないためコード上で設定）ChalkboardSE -> Noteworthy
-    messageLabel1.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize];
-    messageLabel2.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel2.font.pointSize];
+        //フォント設定（Interface Builderから指定しても反映されないためコード上で設定）ChalkboardSE -> Noteworthy
+        messageLabel1.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize * 2];
+        messageLabel2.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel2.font.pointSize * 2];
+
+        //影
+        messageLabel1.shadowOffset = CGSizeMake(2, 2);
+        messageLabel2.shadowOffset = CGSizeMake(2, 2);
+    } else {
+        //角丸設定
+        messageBackground1.layer.cornerRadius = 10;
+        messageBackground2.layer.cornerRadius = 10;
+
+        //フォント設定（Interface Builderから指定しても反映されないためコード上で設定）ChalkboardSE -> Noteworthy
+        messageLabel1.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize];
+        messageLabel2.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel2.font.pointSize];
+
+        //影
+        messageLabel1.shadowOffset = CGSizeMake(1, 1);
+        messageLabel2.shadowOffset = CGSizeMake(1, 1);
+    }
 
     [prevHHmm_ release], prevHHmm_ = nil;
     [timer_ invalidate];
@@ -221,13 +239,27 @@
         //background: (20, 166) - 280 x 200 / 366 (ToolBar: 386)
         //message:    (40, 186) - 240 x 160 / 346
 
-        CGSize size = [messageString sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(240, 160)];
-        messageBackground.frame = CGRectMake((photoContainer.frame.size.width - (size.width + 40)) / 2,
-                                             366 - (size.height + 40),
-                                             size.width + 40, size.height + 40);
-        messageLabel.frame = CGRectMake((photoContainer.frame.size.width - size.width) / 2,
-                                        346 - size.height,
-                                        size.width, size.height);
+        //iPad
+        //background: (40, 490) - 688 x 400 / 890 (ToolBar: 930)
+        //message:    (80, 530) - 608 x 320 / 850
+
+        if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+            CGSize size = [messageString sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(608, 320)];
+            messageBackground.frame = CGRectMake((photoContainer.frame.size.width - (size.width + 80)) / 2,
+                                                 890 - (size.height + 80),
+                                                 size.width + 80, size.height + 80);
+            messageLabel.frame = CGRectMake((photoContainer.frame.size.width - size.width) / 2,
+                                            850 - size.height,
+                                            size.width, size.height);
+        } else {
+            CGSize size = [messageString sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(240, 160)];
+            messageBackground.frame = CGRectMake((photoContainer.frame.size.width - (size.width + 40)) / 2,
+                                                 366 - (size.height + 40),
+                                                 size.width + 40, size.height + 40);
+            messageLabel.frame = CGRectMake((photoContainer.frame.size.width - size.width) / 2,
+                                            346 - size.height,
+                                            size.width, size.height);
+        }
         messageLabel.text = messageString;
         messageBackground.alpha = 0.5;
         messageLabel.alpha = 1;

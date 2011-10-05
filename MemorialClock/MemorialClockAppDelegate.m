@@ -74,7 +74,9 @@
         [self.window.rootViewController dismissModalViewControllerAnimated:NO];
 
         //登録画面を開く
-        RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+        NSString *nibName = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"RegisterViewController"
+                                                                                   : @"RegisterViewController";
+        RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:nibName bundle:nil];
         registerViewController.name = [query objectForKey:@"name"];
         registerViewController.message = [query objectForKey:@"message"];
         registerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;

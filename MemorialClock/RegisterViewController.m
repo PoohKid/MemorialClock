@@ -46,6 +46,9 @@ typedef enum {
     [nameTextField release], nameTextField = nil;
     [messageTextView release], messageTextView = nil;
 
+    popoverController_.delegate = nil;
+    [popoverController_ release], popoverController_ = nil;
+
     [super dealloc];
 }
 
@@ -96,6 +99,9 @@ typedef enum {
     [photoView release], photoView = nil;
     [nameTextField release], nameTextField = nil;
     [messageTextView release], messageTextView = nil;
+
+    popoverController_.delegate = nil;
+    [popoverController_ release], popoverController_ = nil;
 
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -213,7 +219,17 @@ typedef enum {
             UIImagePickerController *imagePickerController = [[UIImagePickerController alloc] init];
             imagePickerController.sourceType = sourceType;
             imagePickerController.delegate = self;
-            [self presentModalViewController:imagePickerController animated:YES];
+            if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+                //iPad用：Popover表示
+                popoverController_.delegate = nil;
+                [popoverController_ release];
+                popoverController_ = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
+                popoverController_.delegate = self;
+                [popoverController_ presentPopoverFromRect:self.view.bounds inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+            } else {
+                //iPhone用：ImagePickerをモーダル表示
+                [self presentModalViewController:imagePickerController animated:YES];
+            }
             [imagePickerController release];
         }
 
@@ -296,7 +312,13 @@ typedef enum {
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
-    [self dismissModalViewControllerAnimated:YES];
+    if (popoverController_) {
+        [popoverController_ dismissPopoverAnimated:YES];
+        popoverController_.delegate = nil;
+        [popoverController_ release], popoverController_ = nil;
+    } else {
+        [self dismissModalViewControllerAnimated:YES];
+    }
 
     //NSLog(@"%f, %f", image.size.width, image.size.height); //カメラ撮影時: 1536.000000, 2048.000000
 
@@ -322,7 +344,7 @@ typedef enum {
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
-    [self dismissModalViewControllerAnimated:YES];
+    [self dismissModalViewControllerAnimated:YES]; //Popoverの場合は呼ばれない？（カメラ時は？）
 }
 
 #pragma mark - MFMailComposeViewControllerDelegate
@@ -330,6 +352,14 @@ typedef enum {
 - (void)mailComposeController:(MFMailComposeViewController *)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError *)error
 {
     [self dismissModalViewControllerAnimated:YES];
+}
+
+#pragma mark - UIPopoverControllerDelegate
+
+- (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
+{
+    popoverController_.delegate = nil;
+    [popoverController_ release], popoverController_ = nil;
 }
 
 @end

@@ -12,7 +12,7 @@
 
 @class UIPlaceHolderTextView;
 
-@interface RegisterViewController : UIViewController <UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MFMailComposeViewControllerDelegate> {
+@interface RegisterViewController : UIViewController <UIAlertViewDelegate, UIActionSheetDelegate, UINavigationControllerDelegate, UIImagePickerControllerDelegate, MFMailComposeViewControllerDelegate, UIPopoverControllerDelegate> {
 
     int memoryId;
     UIImage *photoImage;
@@ -22,6 +22,8 @@
     IBOutlet UIImageView *photoView;
     IBOutlet UITextField *nameTextField;
     IBOutlet UIPlaceHolderTextView *messageTextView;
+
+    UIPopoverController *popoverController_;
 }
 
 @property (nonatomic) int memoryId;
