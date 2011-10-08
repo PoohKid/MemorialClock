@@ -46,9 +46,6 @@ typedef enum {
     [nameTextField release], nameTextField = nil;
     [messageTextView release], messageTextView = nil;
 
-    popoverController_.delegate = nil;
-    [popoverController_ release], popoverController_ = nil;
-
     [super dealloc];
 }
 
@@ -73,39 +70,65 @@ typedef enum {
     //Name初期表示＋プレースホルダ（ImagePicker表示中にUnloadされることがあるので、入力内容の通知を受けプロパティに保持する）
     nameTextField.text = self.name;
     nameTextField.placeholder = @"Name";
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
 
     //Message初期表示＋プレースホルダ（ImagePicker表示中にUnloadされることがあるので、入力内容の通知を受けプロパティに保持する）
     messageTextView.text = self.message;
     messageTextView.placeholder = @"Message";
     messageTextView.placeholderColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChanged:) name:UITextViewTextDidChangeNotification object:nil];
 
-    //フォント設定
-    nameTextField.font = [UIFont fontWithName:@"Noteworthy-Bold" size:nameTextField.font.pointSize];
-    messageTextView.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageTextView.font.pointSize];
-
-    //キーボード表示
-    [nameTextField becomeFirstResponder];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        //フォント設定
+        nameTextField.font = [UIFont fontWithName:@"Noteworthy-Bold" size:nameTextField.font.pointSize * 2];
+        messageTextView.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageTextView.font.pointSize * 2];
+        //最小フォントサイズ
+        nameTextField.minimumFontSize *= 2;
+    } else {
+        //フォント設定
+        nameTextField.font = [UIFont fontWithName:@"Noteworthy-Bold" size:nameTextField.font.pointSize];
+        messageTextView.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageTextView.font.pointSize];
+    }
+    //messageTextViewのオリジナルの高さを保存
+    originalMessageTextViewHeight_ = messageTextView.frame.size.height;
 }
 
 - (void)viewDidUnload
 {
     NSLog(@"viewDidUnload");
 
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
     //propertyは解放しないこと
 
     [photoView release], photoView = nil;
     [nameTextField release], nameTextField = nil;
     [messageTextView release], messageTextView = nil;
 
-    popoverController_.delegate = nil;
-    [popoverController_ release], popoverController_ = nil;
-
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    //UITextField, UITextView変更の通知の開始
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldChanged:) name:UITextFieldTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textViewChanged:) name:UITextViewTextDidChangeNotification object:nil];
+
+    //キーボード表示・非表示の通知の開始
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+
+    //キーボード表示
+    [nameTextField becomeFirstResponder];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    //UITextField, UITextView変更の通知を終了
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextFieldTextDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UITextViewTextDidChangeNotification object:nil];
+
+    //キーボード表示・非表示の通知を終了
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -174,6 +197,32 @@ typedef enum {
     self.message = messageTextView.text;
 }
 
+#pragma mark - UIKeyboardNotification
+
+//キーボードが表示された場合
+- (void)keyboardWillShow:(NSNotification *)aNotification {
+    //キーボードのCGRectを取得
+    CGRect keyboardRect = [[[aNotification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    //キーボードのanimationDurationを取得
+    NSTimeInterval animationDuration = [[[aNotification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue];
+
+    //messageTextViewの高さを調整
+    CGRect frame = messageTextView.frame;
+    frame.size.height = originalMessageTextViewHeight_ - keyboardRect.size.height;
+    [UIView animateWithDuration:animationDuration
+                     animations:^{
+                         messageTextView.frame = frame;
+                     }];
+}
+
+//キーボードが非表示にされた場合
+- (void)keyboardWillHide:(NSNotification *)aNotification {
+    //messageTextViewの高さを調整
+    CGRect frame = messageTextView.frame;
+    frame.size.height = originalMessageTextViewHeight_;
+    messageTextView.frame = frame; //アニメーションすると見た目がおかしくなる
+}
+
 #pragma mark - UIAlertViewDelegate
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
@@ -221,11 +270,9 @@ typedef enum {
             imagePickerController.delegate = self;
             if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
                 //iPad用：Popover表示
-                popoverController_.delegate = nil;
-                [popoverController_ release];
-                popoverController_ = [[UIPopoverController alloc] initWithContentViewController:imagePickerController];
-                popoverController_.delegate = self;
-                [popoverController_ presentPopoverFromRect:self.view.bounds inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                appDelegate.popoverController = [[[UIPopoverController alloc] initWithContentViewController:imagePickerController] autorelease];
+                appDelegate.popoverController.delegate = self;
+                [appDelegate.popoverController presentPopoverFromRect:self.view.bounds inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             } else {
                 //iPhone用：ImagePickerをモーダル表示
                 [self presentModalViewController:imagePickerController animated:YES];
@@ -312,10 +359,10 @@ typedef enum {
 
 - (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)editingInfo
 {
-    if (popoverController_) {
-        [popoverController_ dismissPopoverAnimated:YES];
-        popoverController_.delegate = nil;
-        [popoverController_ release], popoverController_ = nil;
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    if (appDelegate.popoverController) {
+        [appDelegate.popoverController dismissPopoverAnimated:YES];
+        appDelegate.popoverController = nil;
     } else {
         [self dismissModalViewControllerAnimated:YES];
     }
@@ -358,8 +405,8 @@ typedef enum {
 
 - (void)popoverControllerDidDismissPopover:(UIPopoverController *)popoverController
 {
-    popoverController_.delegate = nil;
-    [popoverController_ release], popoverController_ = nil;
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.popoverController = nil;
 }
 
 @end

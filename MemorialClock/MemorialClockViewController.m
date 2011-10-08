@@ -282,7 +282,9 @@
 
 - (IBAction)tapAddButton:(id)sender
 {
-    RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+    NSString *nibName = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"RegisterViewController-iPad"
+                                                                               : @"RegisterViewController";
+    RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:nibName bundle:nil];
     registerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentModalViewController:registerViewController animated:YES];
     [registerViewController release];
@@ -315,7 +317,9 @@
 
 - (IBAction)tapEditButton:(id)sender
 {
-    RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:@"RegisterViewController" bundle:nil];
+    NSString *nibName = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"RegisterViewController-iPad"
+                                                                               : @"RegisterViewController";
+    RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:nibName bundle:nil];
     registerViewController.memoryId = currentMemoryId_;
     registerViewController.photoImage = currentImage_;
     registerViewController.name = currentName_;

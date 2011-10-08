@@ -19,7 +19,7 @@
 
 @synthesize viewController=_viewController;
 
-@synthesize alertView, actionSheet;
+@synthesize alertView, actionSheet, popoverController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -32,6 +32,12 @@
     [self.window makeKeyAndVisible];
 
     return YES;
+}
+
+- (void)setPopoverController:(UIPopoverController *)aPopoverController
+{
+    popoverController.delegate = nil; //必須
+    [popoverController release], popoverController = [aPopoverController retain];
 }
 
 //クエリ文字列を解析
@@ -69,12 +75,15 @@
         //ActionSheetを閉じる
         [self.actionSheet dismissWithClickedButtonIndex:self.actionSheet.cancelButtonIndex animated:NO];
         self.actionSheet = nil;
+        //PopoverControllerを閉じる
+        [self.popoverController dismissPopoverAnimated:YES];
+        self.popoverController = nil;
 
         //モーダル遷移を閉じる（チェーン内のすべてのオブジェクトを閉じる）
         [self.window.rootViewController dismissModalViewControllerAnimated:NO];
 
         //登録画面を開く
-        NSString *nibName = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"RegisterViewController"
+        NSString *nibName = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"RegisterViewController-iPad"
                                                                                    : @"RegisterViewController";
         RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:nibName bundle:nil];
         registerViewController.name = [query objectForKey:@"name"];

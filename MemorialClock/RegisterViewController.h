@@ -23,7 +23,7 @@
     IBOutlet UITextField *nameTextField;
     IBOutlet UIPlaceHolderTextView *messageTextView;
 
-    UIPopoverController *popoverController_;
+    CGFloat originalMessageTextViewHeight_;
 }
 
 @property (nonatomic) int memoryId;

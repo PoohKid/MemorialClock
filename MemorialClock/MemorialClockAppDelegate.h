@@ -13,6 +13,7 @@
 @interface MemorialClockAppDelegate : NSObject <UIApplicationDelegate> {
     UIAlertView *alertView;
     UIActionSheet *actionSheet;
+    UIPopoverController *popoverController;
 }
 
 @property (nonatomic, retain) IBOutlet UIWindow *window;
@@ -21,5 +22,6 @@
 
 @property (nonatomic, retain) UIAlertView *alertView;
 @property (nonatomic, retain) UIActionSheet *actionSheet;
+@property (nonatomic, retain) UIPopoverController *popoverController;
 
 @end
