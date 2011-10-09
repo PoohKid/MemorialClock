@@ -109,7 +109,7 @@ static MemoryModel *sharedMemoryModel_ = nil;
     } else {
         NSLog(@"Could not open db.");
     }
-    NSLog(@"memoryIdList: %@", memoryIdList);
+    //NSLog(@"memoryIdList: %@", memoryIdList);
 
     return memoryIdList;
 }
@@ -274,7 +274,7 @@ static MemoryModel *sharedMemoryModel_ = nil;
         [db setShouldCacheStatements:YES];
         [db beginTransaction];
 
-        //memoryレコード登録
+        //memoryレコード変更
         [db executeUpdate:updateMemory,
          name,
          message,
@@ -283,7 +283,7 @@ static MemoryModel *sharedMemoryModel_ = nil;
             NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
         }
 
-        //画像保存
+        //画像上書き[ or 削除] ※画像を消す機能があれば必要になる
         NSString *imagePath = [self imagePath:memoryId];
         NSData *imageData = UIImageJPEGRepresentation(image, 1.0f); //写真の場合、PNGだとサイズが大きくなるためJPEGを適用
         [imageData writeToFile:imagePath atomically:YES];
@@ -297,6 +297,38 @@ static MemoryModel *sharedMemoryModel_ = nil;
 
 - (void)removeMemory:(int)memoryId
 {
+    NSString *deleteMemory =
+    @"DELETE FROM memory "
+    @"WHERE memory_id = ? ";
+    //NSLog(@"deleteMemory: %@", deleteMemory);
+
+    FMDatabase *db = [FMDatabase databaseWithPath:dbPath_];
+    if ([db open]) {
+        [db setShouldCacheStatements:YES];
+        [db beginTransaction];
+
+        //memoryレコード削除
+        [db executeUpdate:deleteMemory,
+         [NSNumber numberWithInt:memoryId]];
+        if ([db hadError]) {
+            NSLog(@"Err %d: %@", [db lastErrorCode], [db lastErrorMessage]);
+        }
+
+        //画像削除
+        NSString *imagePath = [self imagePath:memoryId];
+        NSFileManager *fileManager = [NSFileManager defaultManager];
+        if ([fileManager fileExistsAtPath:imagePath]) {
+            [fileManager removeItemAtPath:imagePath error:nil];
+        }
+
+        [db commit];
+        [db close];
+    } else {
+        NSLog(@"Could not open db.");
+    }
+
+    //IDリスト再取得
+    [memoryIdList_ release], memoryIdList_ = [[self memoryIdList] retain];
 }
 
 //--------------------------------------------------------------//

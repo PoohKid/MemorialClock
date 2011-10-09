@@ -14,7 +14,7 @@
 
 
 typedef enum {
-    ActionSheetTypeCameraEnable,
+    ActionSheetTypeCameraEnable = 1,
     ActionSheetTypeCameraDisable,
     ActionSheetTypeAction,
 } ActionSheetType;

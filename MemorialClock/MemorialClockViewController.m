@@ -15,6 +15,10 @@
 #import "NSDictionary+Null.h"
 
 
+typedef enum {
+    ActionSheetTypeTrash = 1,
+} ActionSheetType;
+
 @interface MemorialClockViewController (Timer)
 - (void)onTimer:(NSTimer *)timer;
 - (void)stopTimer;
@@ -41,19 +45,39 @@
     [formatter release];
     //NSLog(@"%@, %@", self.title, nowHHmm);
 
-    if ([prevHHmm_ isEqualToString:nowHHmm] == NO) {
+    //ActionSheet表示中は写真を切り替えない
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    if ([prevHHmm_ isEqualToString:nowHHmm] == NO && appDelegate.actionSheet == nil) {
         [prevHHmm_ release], prevHHmm_ = [nowHHmm retain];
         [self changeMemory];
     }
+}
+
+- (void)stopTimer
+{
+    [prevHHmm_ release], prevHHmm_ = nil;
+    [timer_ invalidate];
+    [timer_ release], timer_ = nil;
+}
+
+- (void)startTimer
+{
+    [self stopTimer];
+    timer_ = [[NSTimer scheduledTimerWithTimeInterval:0.25f
+                                               target:self
+                                             selector:@selector(onTimer:)
+                                             userInfo:nil
+                                              repeats:YES
+               ] retain];
+
+    [self onTimer:timer_];
 }
 
 #pragma mark - Initialize
 
 - (void)dealloc
 {
-    [prevHHmm_ release], prevHHmm_ = nil;
-    [timer_ invalidate];
-    [timer_ release], timer_ = nil;
+    [self stopTimer];
 
     [currentImage_ release], currentImage_ = nil;
     [currentName_ release], currentName_ = nil;
@@ -62,6 +86,9 @@
     [navigationBar release], navigationBar = nil;
     [navigationItem release], navigationItem = nil;
     [toolBar release], toolBar = nil;
+    [saveButton release], saveButton = nil;
+    [trashButton release], trashButton = nil;
+    [editButton release], editButton = nil;
 
     [photoContainer release], photoContainer = nil;
     [photoPane1 release], photoPane1 = nil;
@@ -125,25 +152,11 @@
         messageLabel1.shadowOffset = CGSizeMake(1, 1);
         messageLabel2.shadowOffset = CGSizeMake(1, 1);
     }
-
-    [prevHHmm_ release], prevHHmm_ = nil;
-    [timer_ invalidate];
-    [timer_ release];
-    timer_ = [[NSTimer scheduledTimerWithTimeInterval:0.25f
-                                               target:self
-                                             selector:@selector(onTimer:)
-                                             userInfo:nil
-                                              repeats:YES
-               ] retain];
-
-    [self onTimer:timer_];
 }
 
 - (void)viewDidUnload
 {
-    [prevHHmm_ release], prevHHmm_ = nil;
-    [timer_ invalidate];
-    [timer_ release], timer_ = nil;
+    [self stopTimer];
 
     [currentImage_ release], currentImage_ = nil;
     [currentName_ release], currentName_ = nil;
@@ -152,6 +165,9 @@
     [navigationBar release], navigationBar = nil;
     [navigationItem release], navigationItem = nil;
     [toolBar release], toolBar = nil;
+    [saveButton release], saveButton = nil;
+    [trashButton release], trashButton = nil;
+    [editButton release], editButton = nil;
 
     [photoContainer release], photoContainer = nil;
     [photoPane1 release], photoPane1 = nil;
@@ -166,6 +182,16 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [self startTimer];
+}
+
+- (void)viewDidDisappear:(BOOL)animated
+{
+    [self stopTimer];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -275,6 +301,12 @@
                          photoPaneTo.alpha = 1;
                      }];
 
+    //ボタンの有効・無効を設定
+    BOOL enabled = (currentMemoryId_ == 0) ? NO : YES;
+    saveButton.enabled = enabled;
+    trashButton.enabled = enabled;
+    editButton.enabled = enabled;
+
     isViewFirst_ = !isViewFirst_;
 }
 
@@ -313,6 +345,16 @@
 
 - (IBAction)tapTrashButton:(id)sender
 {
+    //写真を削除、キャンセル
+    //Delete Photo, Cancel
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Cancel"
+                                             destructiveButtonTitle:nil
+                                                  otherButtonTitles:@"Delete Photo", nil] autorelease];
+    appDelegate.actionSheet.tag = ActionSheetTypeTrash;
+    [appDelegate.actionSheet showInView:self.view];
 }
 
 - (IBAction)tapEditButton:(id)sender
@@ -343,5 +385,30 @@
     NSLog(@"alertViewCancel");
 }
 */
+
+#pragma mark - UIActionSheetDelegate
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
+    if (actionSheet.tag == ActionSheetTypeTrash) {
+        switch (buttonIndex) {
+            case 0: //Delete Photo
+                [[MemoryModel sharedMemoryModel] removeMemory:currentMemoryId_];
+                [self changeMemory];
+
+                //表示を変更したので前回時刻をリセット
+                NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+                [formatter setDateFormat:@"HH:mm"];
+                [prevHHmm_ release], prevHHmm_ = [[formatter stringFromDate:[NSDate date]] retain];
+                break;
+            default: //Cancel
+                break;
+        }
+    }
+
+    appDelegate.actionSheet = nil; //必ず呼ばれること！！
+}
 
 @end

@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface MemorialClockViewController : UIViewController <UIAlertViewDelegate> {
+@interface MemorialClockViewController : UIViewController <UIAlertViewDelegate, UIActionSheetDelegate> {
     NSTimer *timer_;
     NSString *prevHHmm_;
 
@@ -21,6 +21,9 @@
     IBOutlet UINavigationBar *navigationBar;
     IBOutlet UINavigationItem *navigationItem;
     IBOutlet UIToolbar *toolBar;
+    IBOutlet UIBarButtonItem *saveButton;
+    IBOutlet UIBarButtonItem *trashButton;
+    IBOutlet UIBarButtonItem *editButton;
 
     IBOutlet UIView *photoContainer;
     IBOutlet UIView *photoPane1;

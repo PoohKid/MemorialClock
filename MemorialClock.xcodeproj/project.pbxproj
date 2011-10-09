@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		050C352314406DC100EC1D91 /* Developer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 050C352214406DC100EC1D91 /* Developer-Info.plist */; };
 		050C352914407E3E00EC1D91 /* RegisterViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050C352714407E3E00EC1D91 /* RegisterViewController-iPad.xib */; };
+		05110E951441E94400FDB5DE /* howToUse.png in Resources */ = {isa = PBXBuildFile; fileRef = 05110E941441E94400FDB5DE /* howToUse.png */; };
 		0544728C1426904400392985 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 054472851426904400392985 /* RegisterViewController.xib */; };
 		0544728D1426904400392985 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472871426904400392985 /* RegisterViewController.m */; };
 		0544728E1426904400392985 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 054472891426904400392985 /* Icon.png */; };
@@ -35,13 +36,13 @@
 		05B772CC142253B1008A0B5D /* MemorialClockAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B772CB142253B1008A0B5D /* MemorialClockAppDelegate.m */; };
 		05B772CF142253B1008A0B5D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B772CD142253B1008A0B5D /* MainWindow.xib */; };
 		05B772D2142253B1008A0B5D /* MemorialClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B772D1142253B1008A0B5D /* MemorialClockViewController.m */; };
-		8424AAD81433FCA300E26A98 /* howToUse.png in Resources */ = {isa = PBXBuildFile; fileRef = 8424AAD71433FCA300E26A98 /* howToUse.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0508D86414398E9100295DEA /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		050C352214406DC100EC1D91 /* Developer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Developer-Info.plist"; sourceTree = "<group>"; };
 		050C352814407E3E00EC1D91 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/RegisterViewController-iPad.xib"; sourceTree = "<group>"; };
+		05110E941441E94400FDB5DE /* howToUse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howToUse.png; sourceTree = "<group>"; };
 		054472851426904400392985 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		054472861426904400392985 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		054472871426904400392985 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
@@ -81,7 +82,6 @@
 		05B772CE142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		05B772D0142253B1008A0B5D /* MemorialClockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemorialClockViewController.h; sourceTree = "<group>"; };
 		05B772D1142253B1008A0B5D /* MemorialClockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemorialClockViewController.m; sourceTree = "<group>"; };
-		8424AAD71433FCA300E26A98 /* howToUse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howToUse.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +106,7 @@
 				054472891426904400392985 /* Icon.png */,
 				0544728A1426904400392985 /* Icon@2x.png */,
 				0544728B1426904400392985 /* MemorialClock.db */,
+				05110E941441E94400FDB5DE /* howToUse.png */,
 				050C352214406DC100EC1D91 /* Developer-Info.plist */,
 			);
 			path = Resources;
@@ -220,7 +221,6 @@
 				05B772C2142253B1008A0B5D /* Supporting Files */,
 				054472881426904400392985 /* Resources */,
 				05B101CB143C89B600EA2896 /* iPad */,
-				8424AAD71433FCA300E26A98 /* howToUse.png */,
 			);
 			path = MemorialClock;
 			sourceTree = "<group>";
@@ -292,11 +292,11 @@
 				0544728F1426904400392985 /* Icon@2x.png in Resources */,
 				054472901426904400392985 /* MemorialClock.db in Resources */,
 				055774F81429FABD00B28746 /* README.md in Resources */,
-				8424AAD81433FCA300E26A98 /* howToUse.png in Resources */,
 				05B101CE143C89B800EA2896 /* MainWindow-iPad.xib in Resources */,
 				05B101D3143C9E4700EA2896 /* MemorialClockViewController-iPad.xib in Resources */,
 				050C352314406DC100EC1D91 /* Developer-Info.plist in Resources */,
 				050C352914407E3E00EC1D91 /* RegisterViewController-iPad.xib in Resources */,
+				05110E951441E94400FDB5DE /* howToUse.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
