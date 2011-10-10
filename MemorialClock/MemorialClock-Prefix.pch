@@ -12,3 +12,14 @@
     #import <UIKit/UIKit.h>
     #import <Foundation/Foundation.h>
 #endif
+
+
+#import "GANTracker.h"
+
+#define GA_TRACK_PAGE(PAGE) { NSError *error; if (![[GANTracker sharedTracker] trackPageview:[NSString stringWithFormat:@"/%@", PAGE] withError:&error]) { NSLog(@"%@",error.helpAnchor); } };
+
+#define GA_TRACK_EVENT(EVENT,ACTION,LABEL,VALUE) { NSError *error; if (![[GANTracker sharedTracker] trackEvent:EVENT action:ACTION label:LABEL value:VALUE withError:&error]) { NSLog(@"%@",error.helpAnchor); } };
+
+#define GA_TRACK_CLASS  GA_TRACK_PAGE(NSStringFromClass([self class]));
+
+#define GA_TRACK_METHOD GA_TRACK_EVENT(NSStringFromClass([self class]), NSStringFromSelector(_cmd), @"", -1);

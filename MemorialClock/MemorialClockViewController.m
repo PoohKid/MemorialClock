@@ -13,6 +13,7 @@
 #import "RegisterViewController.h"
 #import "MemoryModel.h"
 #import "NSDictionary+Null.h"
+#import "MultiADBannerView.h"
 
 
 typedef enum {
@@ -40,6 +41,7 @@ typedef enum {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"HH:mm:ss"];
     self.title = [formatter stringFromDate:nowTime];
+    //self.title = @"09:41:00"; //for ScreenShot
     [formatter setDateFormat:@"HH:mm"];
     NSString *nowHHmm = [formatter stringFromDate:nowTime];
     [formatter release];
@@ -100,6 +102,8 @@ typedef enum {
     [messageBackground2 release], messageBackground2 = nil;
     [messageLabel2 release], messageLabel2 = nil;
 
+    [adBannerView release], adBannerView = nil;
+
     [super dealloc];
 }
 
@@ -116,6 +120,8 @@ typedef enum {
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad
 {
+    GA_TRACK_CLASS
+
     [super viewDidLoad];
 
     self.title = @""; //UINavigationItemをOutletするとタイトルに反映されるようになる, nilだとデフォルト表示
@@ -152,6 +158,9 @@ typedef enum {
         messageLabel1.shadowOffset = CGSizeMake(1, 1);
         messageLabel2.shadowOffset = CGSizeMake(1, 1);
     }
+
+    //広告初期化
+    [adBannerView initBannerWithTitle:NSLocalizedString(@"OurMemories", nil) rootViewContoller:self];
 }
 
 - (void)viewDidUnload
@@ -178,6 +187,8 @@ typedef enum {
     [photoView2 release], photoView2 = nil;
     [messageBackground2 release], messageBackground2 = nil;
     [messageLabel2 release], messageLabel2 = nil;
+
+    [adBannerView release], adBannerView = nil;
 
     [super viewDidUnload];
     // Release any retained subviews of the main view.
@@ -266,16 +277,16 @@ typedef enum {
         //message:    (40, 186) - 240 x 160 / 346
 
         //iPad
-        //background: (40, 490) - 688 x 400 / 890 (ToolBar: 930)
-        //message:    (80, 530) - 608 x 320 / 850
+        //background: (40, 474) - 688 x 400 / 874 (ToolBar: 914)
+        //message:    (80, 514) - 608 x 320 / 834
 
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             CGSize size = [messageString sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(608, 320)];
             messageBackground.frame = CGRectMake((photoContainer.frame.size.width - (size.width + 80)) / 2,
-                                                 890 - (size.height + 80),
+                                                 874 - (size.height + 80),
                                                  size.width + 80, size.height + 80);
             messageLabel.frame = CGRectMake((photoContainer.frame.size.width - size.width) / 2,
-                                            850 - size.height,
+                                            834 - size.height,
                                             size.width, size.height);
         } else {
             CGSize size = [messageString sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(240, 160)];
@@ -314,6 +325,8 @@ typedef enum {
 
 - (IBAction)tapAddButton:(id)sender
 {
+    GA_TRACK_METHOD
+
     NSString *nibName = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"RegisterViewController-iPad"
                                                                                : @"RegisterViewController";
     RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:nibName bundle:nil];
@@ -339,6 +352,8 @@ typedef enum {
 
 - (IBAction)tapSaveButton:(id)sender
 {
+    GA_TRACK_METHOD
+
     if (currentImage_) {
         UIImageWriteToSavedPhotosAlbum(currentImage_, self, @selector(image:didFinishSavingWithError:contextInfo:), NULL);
     }
@@ -346,6 +361,8 @@ typedef enum {
 
 - (IBAction)tapTrashButton:(id)sender
 {
+    GA_TRACK_METHOD
+
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                            delegate:self
@@ -358,6 +375,8 @@ typedef enum {
 
 - (IBAction)tapEditButton:(id)sender
 {
+    GA_TRACK_METHOD
+
     NSString *nibName = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? @"RegisterViewController-iPad"
                                                                                : @"RegisterViewController";
     RegisterViewController *registerViewController = [[RegisterViewController alloc] initWithNibName:nibName bundle:nil];

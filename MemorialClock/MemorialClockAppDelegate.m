@@ -11,6 +11,7 @@
 #import "MemorialClockViewController.h"
 #import "RegisterViewController.h"
 #import "NSString+Escape.h"
+#import "DeveloperInfo.h"
 
 @implementation MemorialClockAppDelegate
 
@@ -24,6 +25,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+
+    [[GANTracker sharedTracker] startTrackerWithAccountID:[[DeveloperInfo sharedDeveloperInfo] googleAnalyticsAccountID]
+                                           dispatchPeriod:[[DeveloperInfo sharedDeveloperInfo] googleAnalyticsDispatchPeriod]
+                                                 delegate:nil];
 
     //自動ロックをOFF
     [UIApplication sharedApplication].idleTimerDisabled = YES;
@@ -59,6 +64,8 @@
 //URLスキームを受信
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
+    GA_TRACK_METHOD
+
     //コマンド取得
     NSString *command = nil;
     NSArray *pathComponents = [url pathComponents]; // "/", "command"
@@ -110,6 +117,7 @@
      Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later. 
      If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
      */
+    [[GANTracker sharedTracker] stopTracker];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -117,6 +125,9 @@
     /*
      Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
      */
+    [[GANTracker sharedTracker] startTrackerWithAccountID:[[DeveloperInfo sharedDeveloperInfo] googleAnalyticsAccountID]
+                                           dispatchPeriod:[[DeveloperInfo sharedDeveloperInfo] googleAnalyticsDispatchPeriod]
+                                                 delegate:nil];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
@@ -133,6 +144,7 @@
      Save data if appropriate.
      See also applicationDidEnterBackground:.
      */
+    [[GANTracker sharedTracker] stopTracker];
 }
 
 - (void)dealloc

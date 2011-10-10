@@ -62,6 +62,8 @@ typedef enum {
 
 - (void)viewDidLoad
 {
+    GA_TRACK_CLASS
+
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
@@ -151,6 +153,8 @@ typedef enum {
 
 - (IBAction)tapCameraButton:(id)sender
 {
+    GA_TRACK_METHOD
+
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
@@ -175,6 +179,8 @@ typedef enum {
 
 - (IBAction)tapActionButton:(id)sender
 {
+    GA_TRACK_METHOD
+
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                            delegate:self
@@ -249,9 +255,11 @@ typedef enum {
             case ActionSheetTypeCameraEnable:
                 switch (buttonIndex) {
                     case 0:
+                        GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"Camera", -1);
                         sourceType = UIImagePickerControllerSourceTypeCamera;
                         break;
                     case 1:
+                        GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"PhotoLibrary", -1);
                         sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                         break;
                     default: //Cancel
@@ -261,6 +269,7 @@ typedef enum {
             case ActionSheetTypeCameraDisable:
                 switch (buttonIndex) {
                     case 0:
+                        GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"PhotoLibrary", -1);
                         sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
                         break;
                     default: //Cancel
@@ -287,6 +296,7 @@ typedef enum {
     } else if (actionSheet.tag == ActionSheetTypeAction) {
         switch (buttonIndex) {
             case 0: //Save
+                GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"Save", -1);
                 if (self.memoryId == 0) {
                     //add
                     self.memoryId = [[MemoryModel sharedMemoryModel] addMemory:nameTextField.text
@@ -307,6 +317,7 @@ typedef enum {
                 [appDelegate.alertView show];
                 break;
             case 1: //Send Mail
+                GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"Send Mail", -1);
                 {
                     MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
                     mailComposeViewController.mailComposeDelegate = self;

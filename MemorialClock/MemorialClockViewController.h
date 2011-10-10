@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+@class MultiADBannerView;
+
 @interface MemorialClockViewController : UIViewController <UIAlertViewDelegate, UIActionSheetDelegate> {
     NSTimer *timer_;
     NSString *prevHHmm_;
@@ -34,6 +36,8 @@
     IBOutlet UIImageView *photoView2;
     IBOutlet UIView *messageBackground2;
     IBOutlet UILabel *messageLabel2;
+
+    IBOutlet MultiADBannerView *adBannerView;
 }
 
 - (IBAction)tapAddButton:(id)sender;
