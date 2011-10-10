@@ -42,6 +42,7 @@ typedef enum {
     [name release], name = nil;
     [message release], message = nil;
 
+    [backButton release], backButton = nil;
     [photoView release], photoView = nil;
     [nameTextField release], nameTextField = nil;
     [messageTextView release], messageTextView = nil;
@@ -64,16 +65,18 @@ typedef enum {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
 
+    backButton.title = NSLocalizedString(@"Back", nil);
+
     //Photo初期表示
     photoView.image = self.photoImage;
 
     //Name初期表示＋プレースホルダ（ImagePicker表示中にUnloadされることがあるので、入力内容の通知を受けプロパティに保持する）
     nameTextField.text = self.name;
-    nameTextField.placeholder = @"Name";
+    nameTextField.placeholder = NSLocalizedString(@"Name", nil);
 
     //Message初期表示＋プレースホルダ（ImagePicker表示中にUnloadされることがあるので、入力内容の通知を受けプロパティに保持する）
     messageTextView.text = self.message;
-    messageTextView.placeholder = @"Message";
+    messageTextView.placeholder = NSLocalizedString(@"Message", nil);
     messageTextView.placeholderColor = [UIColor colorWithRed:179/255.0 green:179/255.0 blue:179/255.0 alpha:1];
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
@@ -93,10 +96,11 @@ typedef enum {
 
 - (void)viewDidUnload
 {
-    NSLog(@"viewDidUnload");
+    //NSLog(@"viewDidUnload");
 
     //propertyは解放しないこと
 
+    [backButton release], backButton = nil;
     [photoView release], photoView = nil;
     [nameTextField release], nameTextField = nil;
     [messageTextView release], messageTextView = nil;
@@ -147,25 +151,23 @@ typedef enum {
 
 - (IBAction)tapCameraButton:(id)sender
 {
-    //ラーメン大陸
-    //写真を撮る、写真をライブラリから選択
-    //Twitter
-    //Take Photo or Video..., Choose from Library...
-    //写真やビデオを撮る..., ライブラリから選択...
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                                delegate:self
-                                                      cancelButtonTitle:@"Cancel"
+                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                                  destructiveButtonTitle:nil
-                                                      otherButtonTitles:@"Take Photo", @"Choose from Library", nil] autorelease];
+                                                      otherButtonTitles:NSLocalizedString(@"Take Photo", nil),
+                                                                        NSLocalizedString(@"Choose from Library", nil),
+                                                                        nil] autorelease];
         appDelegate.actionSheet.tag = ActionSheetTypeCameraEnable;
     } else {
         appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                                delegate:self
-                                                      cancelButtonTitle:@"Cancel"
+                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                                  destructiveButtonTitle:nil
-                                                      otherButtonTitles:@"Choose from Library", nil] autorelease];
+                                                      otherButtonTitles:NSLocalizedString(@"Choose from Library", nil),
+                                                                        nil] autorelease];
         appDelegate.actionSheet.tag = ActionSheetTypeCameraDisable;
     }
     [appDelegate.actionSheet showInView:self.view];
@@ -176,9 +178,11 @@ typedef enum {
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                            delegate:self
-                                                  cancelButtonTitle:@"Cancel"
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                              destructiveButtonTitle:nil
-                                                  otherButtonTitles:@"Save", @"Send Mail", nil] autorelease];
+                                                  otherButtonTitles:NSLocalizedString(@"Save", nil),
+                                                                    NSLocalizedString(@"Send Mail", nil),
+                                                                    nil] autorelease];
     appDelegate.actionSheet.tag = ActionSheetTypeAction;
     [appDelegate.actionSheet showInView:self.view];
 }
@@ -296,9 +300,9 @@ typedef enum {
                                                             image:photoView.image];
                 }
                 appDelegate.alertView = [[[UIAlertView alloc] initWithTitle:nil
-                                                                    message:@"Saved"
+                                                                    message:NSLocalizedString(@"Saved", nil)
                                                                    delegate:self
-                                                          cancelButtonTitle:@"OK"
+                                                          cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                                           otherButtonTitles:nil] autorelease];
                 [appDelegate.alertView show];
                 break;
@@ -308,29 +312,36 @@ typedef enum {
                     mailComposeViewController.mailComposeDelegate = self;
 
                     //メールタイトル設定
-                    [mailComposeViewController setSubject:@"OurMemories"]; //卒業時計
+                    [mailComposeViewController setSubject:NSLocalizedString(@"OurMemories", nil)];
 
                     //メール本文を設定
                     NSString *messageBody;
                     if (photoView.image) {
                         messageBody = [NSString stringWithFormat:
-                                       @"Happy Graduation!\n"                                   //卒業おめでとう！
+                                       @"%@\n"
                                        @"\n"
-                                       @"Please save your photo album first.\n"                 //まず写真をアルバムに保存してください。
+                                       @"%@\n"
                                        @"\n"
-                                       @"Please click the link below and then.\n"               //その後で下のリンクをクリックしてください。
-                                       @"Then \"OurMemories\" open the registration screen.\n"  //すると"卒業時計"の登録画面が開きます。
+                                       @"%@\n"
+                                       @"%@\n"
                                        @"\n"
                                        @"memorialclock:///regist?name=%@&message=%@\n",
+                                       NSLocalizedString(@"Happy Graduation!", nil),
+                                       NSLocalizedString(@"Please save your photo album first.", nil),
+                                       NSLocalizedString(@"Please click the link below and then.", nil),
+                                       NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
                                        [nameTextField.text escapeString], [messageTextView.text escapeString]];
                     } else {
                         messageBody = [NSString stringWithFormat:
-                                       @"Happy Graduation!\n"                                   //卒業おめでとう！
+                                       @"%@\n"
                                        @"\n"
-                                       @"Please click the link below.\n"                        //下のリンクをクリックしてください。
-                                       @"Then \"OurMemories\" open the registration screen.\n"  //すると"卒業時計"の登録画面が開きます。
+                                       @"%@\n"
+                                       @"%@\n"
                                        @"\n"
                                        @"memorialclock:///regist?name=%@&message=%@\n",
+                                       NSLocalizedString(@"Happy Graduation!", nil),
+                                       NSLocalizedString(@"Please click the link below.", nil),
+                                       NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
                                        [nameTextField.text escapeString], [messageTextView.text escapeString]];
                     }
                     [mailComposeViewController setMessageBody:messageBody isHTML:NO];

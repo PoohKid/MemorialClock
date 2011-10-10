@@ -36,6 +36,7 @@
 		05B772CC142253B1008A0B5D /* MemorialClockAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B772CB142253B1008A0B5D /* MemorialClockAppDelegate.m */; };
 		05B772CF142253B1008A0B5D /* MainWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B772CD142253B1008A0B5D /* MainWindow.xib */; };
 		05B772D2142253B1008A0B5D /* MemorialClockViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B772D1142253B1008A0B5D /* MemorialClockViewController.m */; };
+		05B7E79414434BE70062E2D5 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 05B7E79614434BE70062E2D5 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -82,6 +83,8 @@
 		05B772CE142253B1008A0B5D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainWindow.xib; sourceTree = "<group>"; };
 		05B772D0142253B1008A0B5D /* MemorialClockViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MemorialClockViewController.h; sourceTree = "<group>"; };
 		05B772D1142253B1008A0B5D /* MemorialClockViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MemorialClockViewController.m; sourceTree = "<group>"; };
+		05B7E79514434BE70062E2D5 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		05B7E79714434C090062E2D5 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -232,6 +235,7 @@
 				05B772C4142253B1008A0B5D /* InfoPlist.strings */,
 				05B772C7142253B1008A0B5D /* MemorialClock-Prefix.pch */,
 				05B772C8142253B1008A0B5D /* main.m */,
+				05B7E79614434BE70062E2D5 /* Localizable.strings */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -297,6 +301,7 @@
 				050C352314406DC100EC1D91 /* Developer-Info.plist in Resources */,
 				050C352914407E3E00EC1D91 /* RegisterViewController-iPad.xib in Resources */,
 				05110E951441E94400FDB5DE /* howToUse.png in Resources */,
+				05B7E79414434BE70062E2D5 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +368,15 @@
 				05B772CE142253B1008A0B5D /* en */,
 			);
 			name = MainWindow.xib;
+			sourceTree = "<group>";
+		};
+		05B7E79614434BE70062E2D5 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05B7E79514434BE70062E2D5 /* en */,
+				05B7E79714434C090062E2D5 /* ja */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

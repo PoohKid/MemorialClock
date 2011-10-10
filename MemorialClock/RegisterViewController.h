@@ -19,6 +19,7 @@
     NSString *name;
     NSString *message;
 
+    IBOutlet UIBarButtonItem *backButton;
     IBOutlet UIImageView *photoView;
     IBOutlet UITextField *nameTextField;
     IBOutlet UIPlaceHolderTextView *messageTextView;

@@ -329,9 +329,10 @@ typedef enum {
     }
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     appDelegate.alertView = [[[UIAlertView alloc] initWithTitle:nil
-                                                        message:error ? @"Failed" : @"Saved"
+                                                        message:error ? NSLocalizedString(@"Failed", nil)
+                                                                      : NSLocalizedString(@"Saved", nil)
                                                        delegate:self
-                                              cancelButtonTitle:@"OK"
+                                              cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                               otherButtonTitles:nil] autorelease];
     [appDelegate.alertView show];
 }
@@ -345,14 +346,12 @@ typedef enum {
 
 - (IBAction)tapTrashButton:(id)sender
 {
-    //写真を削除、キャンセル
-    //Delete Photo, Cancel
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
     appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                            delegate:self
-                                                  cancelButtonTitle:@"Cancel"
+                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
                                              destructiveButtonTitle:nil
-                                                  otherButtonTitles:@"Delete Photo", nil] autorelease];
+                                                  otherButtonTitles:NSLocalizedString(@"Delete Photo", nil), nil] autorelease];
     appDelegate.actionSheet.tag = ActionSheetTypeTrash;
     [appDelegate.actionSheet showInView:self.view];
 }
