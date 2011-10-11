@@ -181,15 +181,32 @@ typedef enum {
 {
     GA_TRACK_METHOD
 
+    BOOL canSendMail = NO;
+	Class mailClass = (NSClassFromString(@"MFMailComposeViewController"));
+	if (mailClass != nil) {
+		if ([mailClass canSendMail]) {
+            canSendMail = YES;
+		}
+	}
+
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
-    appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
-                                                           delegate:self
-                                                  cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
-                                             destructiveButtonTitle:nil
-                                                  otherButtonTitles:NSLocalizedString(@"Save", nil),
-                                                                    NSLocalizedString(@"Send Mail", nil),
-                                                                    nil] autorelease];
-    appDelegate.actionSheet.tag = ActionSheetTypeAction;
+    if (canSendMail) {
+        appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
+                                                               delegate:self
+                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                 destructiveButtonTitle:nil
+                                                      otherButtonTitles:NSLocalizedString(@"Save", nil),
+                                                                        NSLocalizedString(@"Send Mail", nil),
+                                                                        nil] autorelease];
+    } else {
+        appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
+                                                               delegate:self
+                                                      cancelButtonTitle:NSLocalizedString(@"Cancel", nil)
+                                                 destructiveButtonTitle:nil
+                                                      otherButtonTitles:NSLocalizedString(@"Save", nil),
+                                                                        nil] autorelease];
+    }
+    appDelegate.actionSheet.tag = ActionSheetTypeAction; //どちらのケースもインデックスは同一のためタグの区別はしない
     [appDelegate.actionSheet showInView:self.view];
 }
 
@@ -320,53 +337,55 @@ typedef enum {
                 GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"Send Mail", -1);
                 {
                     MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
-                    mailComposeViewController.mailComposeDelegate = self;
+                    if (mailComposeViewController) {
+                        mailComposeViewController.mailComposeDelegate = self;
 
-                    //メールタイトル設定
-                    [mailComposeViewController setSubject:NSLocalizedString(@"OurMemories", nil)];
+                        //メールタイトル設定
+                        [mailComposeViewController setSubject:NSLocalizedString(@"OurMemories", nil)];
 
-                    //メール本文を設定
-                    NSString *messageBody;
-                    if (photoView.image) {
-                        messageBody = [NSString stringWithFormat:
-                                       @"%@\n"
-                                       @"\n"
-                                       @"%@\n"
-                                       @"\n"
-                                       @"%@\n"
-                                       @"%@\n"
-                                       @"\n"
-                                       @"memorialclock:///regist?name=%@&message=%@\n",
-                                       NSLocalizedString(@"Happy Graduation!", nil),
-                                       NSLocalizedString(@"Please save your photo album first.", nil),
-                                       NSLocalizedString(@"Please click the link below and then.", nil),
-                                       NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
-                                       [nameTextField.text escapeString], [messageTextView.text escapeString]];
-                    } else {
-                        messageBody = [NSString stringWithFormat:
-                                       @"%@\n"
-                                       @"\n"
-                                       @"%@\n"
-                                       @"%@\n"
-                                       @"\n"
-                                       @"memorialclock:///regist?name=%@&message=%@\n",
-                                       NSLocalizedString(@"Happy Graduation!", nil),
-                                       NSLocalizedString(@"Please click the link below.", nil),
-                                       NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
-                                       [nameTextField.text escapeString], [messageTextView.text escapeString]];
+                        //メール本文を設定
+                        NSString *messageBody;
+                        if (photoView.image) {
+                            messageBody = [NSString stringWithFormat:
+                                           @"%@\n"
+                                           @"\n"
+                                           @"%@\n"
+                                           @"\n"
+                                           @"%@\n"
+                                           @"%@\n"
+                                           @"\n"
+                                           @"memorialclock:///regist?name=%@&message=%@\n",
+                                           NSLocalizedString(@"Happy Graduation!", nil),
+                                           NSLocalizedString(@"Please save your photo album first.", nil),
+                                           NSLocalizedString(@"Please click the link below and then.", nil),
+                                           NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
+                                           [nameTextField.text escapeString], [messageTextView.text escapeString]];
+                        } else {
+                            messageBody = [NSString stringWithFormat:
+                                           @"%@\n"
+                                           @"\n"
+                                           @"%@\n"
+                                           @"%@\n"
+                                           @"\n"
+                                           @"memorialclock:///regist?name=%@&message=%@\n",
+                                           NSLocalizedString(@"Happy Graduation!", nil),
+                                           NSLocalizedString(@"Please click the link below.", nil),
+                                           NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
+                                           [nameTextField.text escapeString], [messageTextView.text escapeString]];
+                        }
+                        [mailComposeViewController setMessageBody:messageBody isHTML:NO];
+
+                        //画像を添付
+                        if (photoView.image) {
+                            NSData *data = [[NSData alloc] initWithData:UIImageJPEGRepresentation(photoView.image, 1.0f)];
+                            [mailComposeViewController addAttachmentData:data mimeType:@"image/jpg" fileName:@"photo"];
+                            [data release];
+                        }
+
+                        //MFMailComposeViewController表示
+                        [self presentModalViewController:mailComposeViewController animated:YES];
+                        [mailComposeViewController release];
                     }
-                    [mailComposeViewController setMessageBody:messageBody isHTML:NO];
-
-                    //画像を添付
-                    if (photoView.image) {
-                        NSData *data = [[NSData alloc] initWithData:UIImageJPEGRepresentation(photoView.image, 1.0f)];
-                        [mailComposeViewController addAttachmentData:data mimeType:@"image/jpg" fileName:@"photo"];
-                        [data release];
-                    }
-
-                    //MFMailComposeViewController表示
-                    [self presentModalViewController:mailComposeViewController animated:YES];
-                    [mailComposeViewController release];
                 }
                 break;
             default: //Cancel
