@@ -50,6 +50,7 @@
 		846F42FD1445887700C53ED4 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 846F42FB1445887700C53ED4 /* Default-Portrait.png */; };
 		846F42FE1445887700C53ED4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 846F42FC1445887700C53ED4 /* Default.png */; };
 		846F430014458C7F00C53ED4 /* howToUse.png in Resources */ = {isa = PBXBuildFile; fileRef = 846F430214458C7F00C53ED4 /* howToUse.png */; };
+		84F1970714459C5800D900F4 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 84F1970614459C5800D900F4 /* Default@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -121,6 +122,7 @@
 		846F42FC1445887700C53ED4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		846F430114458C7F00C53ED4 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/howToUse.png; sourceTree = "<group>"; };
 		846F430314458C8700C53ED4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = ja.lproj/howToUse.png; sourceTree = "<group>"; };
+		84F1970614459C5800D900F4 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 				054472891426904400392985 /* Icon.png */,
 				0544728A1426904400392985 /* Icon@2x.png */,
 				846F42FC1445887700C53ED4 /* Default.png */,
+				84F1970614459C5800D900F4 /* Default@2x.png */,
 				846F42FB1445887700C53ED4 /* Default-Portrait.png */,
 				0544728B1426904400392985 /* MemorialClock.db */,
 				846F430214458C7F00C53ED4 /* howToUse.png */,
@@ -395,6 +398,7 @@
 				05B7E7C6144359AD0062E2D5 /* MultiADBannerView.xib in Resources */,
 				846F42FD1445887700C53ED4 /* Default-Portrait.png in Resources */,
 				846F42FE1445887700C53ED4 /* Default.png in Resources */,
+				84F1970714459C5800D900F4 /* Default@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
