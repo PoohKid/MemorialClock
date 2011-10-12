@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		050C352314406DC100EC1D91 /* Developer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 050C352214406DC100EC1D91 /* Developer-Info.plist */; };
 		050C352914407E3E00EC1D91 /* RegisterViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050C352714407E3E00EC1D91 /* RegisterViewController-iPad.xib */; };
-		05110E951441E94400FDB5DE /* howToUse.png in Resources */ = {isa = PBXBuildFile; fileRef = 05110E941441E94400FDB5DE /* howToUse.png */; };
 		0544728C1426904400392985 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 054472851426904400392985 /* RegisterViewController.xib */; };
 		0544728D1426904400392985 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472871426904400392985 /* RegisterViewController.m */; };
 		0544728E1426904400392985 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 054472891426904400392985 /* Icon.png */; };
@@ -48,13 +47,15 @@
 		05B7E7C4144359700062E2D5 /* MultiADBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B7E7C3144359700062E2D5 /* MultiADBannerView.m */; };
 		05B7E7C6144359AD0062E2D5 /* MultiADBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B7E7C5144359AD0062E2D5 /* MultiADBannerView.xib */; };
 		05B7E7C914436EA40062E2D5 /* DeveloperInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B7E7C814436EA40062E2D5 /* DeveloperInfo.m */; };
+		846F42FD1445887700C53ED4 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 846F42FB1445887700C53ED4 /* Default-Portrait.png */; };
+		846F42FE1445887700C53ED4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 846F42FC1445887700C53ED4 /* Default.png */; };
+		846F430014458C7F00C53ED4 /* howToUse.png in Resources */ = {isa = PBXBuildFile; fileRef = 846F430214458C7F00C53ED4 /* howToUse.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0508D86414398E9100295DEA /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		050C352214406DC100EC1D91 /* Developer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Developer-Info.plist"; sourceTree = "<group>"; };
 		050C352814407E3E00EC1D91 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/RegisterViewController-iPad.xib"; sourceTree = "<group>"; };
-		05110E941441E94400FDB5DE /* howToUse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = howToUse.png; sourceTree = "<group>"; };
 		054472851426904400392985 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		054472861426904400392985 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		054472871426904400392985 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
@@ -116,6 +117,10 @@
 		05B7E7C5144359AD0062E2D5 /* MultiADBannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiADBannerView.xib; sourceTree = "<group>"; };
 		05B7E7C714436EA40062E2D5 /* DeveloperInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeveloperInfo.h; sourceTree = "<group>"; };
 		05B7E7C814436EA40062E2D5 /* DeveloperInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeveloperInfo.m; sourceTree = "<group>"; };
+		846F42FB1445887700C53ED4 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
+		846F42FC1445887700C53ED4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		846F430114458C7F00C53ED4 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/howToUse.png; sourceTree = "<group>"; };
+		846F430314458C8700C53ED4 /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = ja.lproj/howToUse.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,8 +151,10 @@
 			children = (
 				054472891426904400392985 /* Icon.png */,
 				0544728A1426904400392985 /* Icon@2x.png */,
+				846F42FC1445887700C53ED4 /* Default.png */,
+				846F42FB1445887700C53ED4 /* Default-Portrait.png */,
 				0544728B1426904400392985 /* MemorialClock.db */,
-				05110E941441E94400FDB5DE /* howToUse.png */,
+				846F430214458C7F00C53ED4 /* howToUse.png */,
 				050C352214406DC100EC1D91 /* Developer-Info.plist */,
 			);
 			path = Resources;
@@ -382,10 +389,12 @@
 				05B101D3143C9E4700EA2896 /* MemorialClockViewController-iPad.xib in Resources */,
 				050C352314406DC100EC1D91 /* Developer-Info.plist in Resources */,
 				050C352914407E3E00EC1D91 /* RegisterViewController-iPad.xib in Resources */,
-				05110E951441E94400FDB5DE /* howToUse.png in Resources */,
+				846F430014458C7F00C53ED4 /* howToUse.png in Resources */,
 				05B7E79414434BE70062E2D5 /* Localizable.strings in Resources */,
 				05B7E7B3144356060062E2D5 /* README.txt in Resources */,
 				05B7E7C6144359AD0062E2D5 /* MultiADBannerView.xib in Resources */,
+				846F42FD1445887700C53ED4 /* Default-Portrait.png in Resources */,
+				846F42FE1445887700C53ED4 /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,6 +472,15 @@
 				05B7E79714434C090062E2D5 /* ja */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		846F430214458C7F00C53ED4 /* howToUse.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				846F430114458C7F00C53ED4 /* en */,
+				846F430314458C8700C53ED4 /* ja */,
+			);
+			name = howToUse.png;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

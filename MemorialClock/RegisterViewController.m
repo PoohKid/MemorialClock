@@ -16,8 +16,15 @@
 typedef enum {
     ActionSheetTypeCameraEnable = 1,
     ActionSheetTypeCameraDisable,
-    ActionSheetTypeAction,
+    ActionSheetTypeMailEnable,
+    ActionSheetTypeMailDisable,
 } ActionSheetType;
+
+typedef enum {
+    ActionTypeNone,
+    ActionTypeSave,
+    ActionTypeMail,
+} ActionType;
 
 @implementation RegisterViewController
 
@@ -198,6 +205,7 @@ typedef enum {
                                                       otherButtonTitles:NSLocalizedString(@"Save", nil),
                                                                         NSLocalizedString(@"Send Mail", nil),
                                                                         nil] autorelease];
+        appDelegate.actionSheet.tag = ActionSheetTypeMailEnable;
     } else {
         appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                                delegate:self
@@ -205,8 +213,8 @@ typedef enum {
                                                  destructiveButtonTitle:nil
                                                       otherButtonTitles:NSLocalizedString(@"Save", nil),
                                                                         nil] autorelease];
+        appDelegate.actionSheet.tag = ActionSheetTypeMailDisable;
     }
-    appDelegate.actionSheet.tag = ActionSheetTypeAction; //どちらのケースもインデックスは同一のためタグの区別はしない
     [appDelegate.actionSheet showInView:self.view];
 }
 
@@ -310,9 +318,35 @@ typedef enum {
             [imagePickerController release];
         }
 
-    } else if (actionSheet.tag == ActionSheetTypeAction) {
-        switch (buttonIndex) {
-            case 0: //Save
+    } else if (actionSheet.tag == ActionSheetTypeMailEnable ||
+               actionSheet.tag == ActionSheetTypeMailDisable) {
+
+        ActionType actionType = ActionTypeNone;
+        switch (actionSheet.tag) {
+            case ActionSheetTypeMailEnable:
+                switch (buttonIndex) {
+                    case 0: //Save
+                        actionType = ActionTypeSave;
+                        break;
+                    case 1: //Send Mail
+                        actionType = ActionTypeMail;
+                        break;
+                    default: //Cancel
+                        break;
+                }
+                break;
+            case ActionSheetTypeMailDisable:
+                switch (buttonIndex) {
+                    case 0: //Save
+                        actionType = ActionTypeSave;
+                        break;
+                    default: //Cancel
+                        break;
+                }
+                break;
+        }
+        switch (actionType) {
+            case ActionTypeSave:
                 GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"Save", -1);
                 if (self.memoryId == 0) {
                     //add
@@ -333,7 +367,7 @@ typedef enum {
                                                           otherButtonTitles:nil] autorelease];
                 [appDelegate.alertView show];
                 break;
-            case 1: //Send Mail
+            case ActionTypeMail:
                 GA_TRACK_EVENT(NSStringFromClass([self class]),  NSStringFromSelector(_cmd), @"Send Mail", -1);
                 {
                     MFMailComposeViewController *mailComposeViewController = [[MFMailComposeViewController alloc] init];
@@ -388,7 +422,7 @@ typedef enum {
                     }
                 }
                 break;
-            default: //Cancel
+            default: //ActionTypeNone(Cancel)
                 break;
         }
     }
