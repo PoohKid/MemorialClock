@@ -16,6 +16,7 @@
 	<array>
 		<string>Icon.png</string>
 		<string>Icon@2x.png</string>
+		<string>Icon-72.png</string>
 	</array>
 	<key>CFBundleIdentifier</key>
 	<string>PoohKid.${PRODUCT_NAME:rfc1034identifier}</string>
@@ -50,6 +51,8 @@
 	<string>MainWindow</string>
 	<key>NSMainNibFile~ipad</key>
 	<string>MainWindow-iPad</string>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UIStatusBarHidden</key>
 	<true/>
 	<key>UISupportedInterfaceOrientations</key>

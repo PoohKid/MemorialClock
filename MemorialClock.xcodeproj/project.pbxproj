@@ -47,6 +47,7 @@
 		05B7E7C4144359700062E2D5 /* MultiADBannerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B7E7C3144359700062E2D5 /* MultiADBannerView.m */; };
 		05B7E7C6144359AD0062E2D5 /* MultiADBannerView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B7E7C5144359AD0062E2D5 /* MultiADBannerView.xib */; };
 		05B7E7C914436EA40062E2D5 /* DeveloperInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 05B7E7C814436EA40062E2D5 /* DeveloperInfo.m */; };
+		8440F9FF1446A14E00B4BCB3 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 8440F9FE1446A14E00B4BCB3 /* Icon-72.png */; };
 		846F42FD1445887700C53ED4 /* Default-Portrait.png in Resources */ = {isa = PBXBuildFile; fileRef = 846F42FB1445887700C53ED4 /* Default-Portrait.png */; };
 		846F42FE1445887700C53ED4 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 846F42FC1445887700C53ED4 /* Default.png */; };
 		846F430014458C7F00C53ED4 /* howToUse.png in Resources */ = {isa = PBXBuildFile; fileRef = 846F430214458C7F00C53ED4 /* howToUse.png */; };
@@ -118,6 +119,7 @@
 		05B7E7C5144359AD0062E2D5 /* MultiADBannerView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MultiADBannerView.xib; sourceTree = "<group>"; };
 		05B7E7C714436EA40062E2D5 /* DeveloperInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DeveloperInfo.h; sourceTree = "<group>"; };
 		05B7E7C814436EA40062E2D5 /* DeveloperInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DeveloperInfo.m; sourceTree = "<group>"; };
+		8440F9FE1446A14E00B4BCB3 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
 		846F42FB1445887700C53ED4 /* Default-Portrait.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait.png"; sourceTree = "<group>"; };
 		846F42FC1445887700C53ED4 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		846F430114458C7F00C53ED4 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/howToUse.png; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 			children = (
 				054472891426904400392985 /* Icon.png */,
 				0544728A1426904400392985 /* Icon@2x.png */,
+				8440F9FE1446A14E00B4BCB3 /* Icon-72.png */,
 				846F42FC1445887700C53ED4 /* Default.png */,
 				84F1970614459C5800D900F4 /* Default@2x.png */,
 				846F42FB1445887700C53ED4 /* Default-Portrait.png */,
@@ -399,6 +402,7 @@
 				846F42FD1445887700C53ED4 /* Default-Portrait.png in Resources */,
 				846F42FE1445887700C53ED4 /* Default.png in Resources */,
 				84F1970714459C5800D900F4 /* Default@2x.png in Resources */,
+				8440F9FF1446A14E00B4BCB3 /* Icon-72.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
