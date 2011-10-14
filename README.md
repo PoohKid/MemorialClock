@@ -47,3 +47,13 @@ A.ご家族同士でお使いいただくのもよろしいかと。田舎のご
 
 ## 機能
 
+## Metadata
++ Primary Category
+    + Photo & Video
++ Secondary Category
+    + Entertainment
++ Keywords
+    + Photo,Photograph,Picture,frame,Graduation,Student,Yearbook,Classbook,Album,Bijin Tokei,Clock,Watch
+    + フォトフレーム,写真,卒業,アルバム,卒業アルバム,美人時計,時計
++ Copyright
+    + PoohKid & maasa
