@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		050C352314406DC100EC1D91 /* Developer-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 050C352214406DC100EC1D91 /* Developer-Info.plist */; };
 		050C352914407E3E00EC1D91 /* RegisterViewController-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 050C352714407E3E00EC1D91 /* RegisterViewController-iPad.xib */; };
+		052D771C1447CBDC009333F8 /* Default-Portrait~ipad.png in Resources */ = {isa = PBXBuildFile; fileRef = 052D771B1447CBDC009333F8 /* Default-Portrait~ipad.png */; };
 		0544728C1426904400392985 /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 054472851426904400392985 /* RegisterViewController.xib */; };
 		0544728D1426904400392985 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472871426904400392985 /* RegisterViewController.m */; };
 		0544728E1426904400392985 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 054472891426904400392985 /* Icon.png */; };
@@ -58,6 +59,7 @@
 		0508D86414398E9100295DEA /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		050C352214406DC100EC1D91 /* Developer-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Developer-Info.plist"; sourceTree = "<group>"; };
 		050C352814407E3E00EC1D91 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = "iPad/en.lproj/RegisterViewController-iPad.xib"; sourceTree = "<group>"; };
+		052D771B1447CBDC009333F8 /* Default-Portrait~ipad.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-Portrait~ipad.png"; sourceTree = "<group>"; };
 		054472851426904400392985 /* RegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		054472861426904400392985 /* RegisterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterViewController.h; sourceTree = "<group>"; };
 		054472871426904400392985 /* RegisterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterViewController.m; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				846F42FC1445887700C53ED4 /* Default.png */,
 				84F1970614459C5800D900F4 /* Default@2x.png */,
 				846F42FB1445887700C53ED4 /* Default-Portrait.png */,
+				052D771B1447CBDC009333F8 /* Default-Portrait~ipad.png */,
 				0544728B1426904400392985 /* MemorialClock.db */,
 				846F430214458C7F00C53ED4 /* howToUse.png */,
 				050C352214406DC100EC1D91 /* Developer-Info.plist */,
@@ -403,6 +406,7 @@
 				846F42FE1445887700C53ED4 /* Default.png in Resources */,
 				84F1970714459C5800D900F4 /* Default@2x.png in Resources */,
 				8440F9FF1446A14E00B4BCB3 /* Icon-72.png in Resources */,
+				052D771C1447CBDC009333F8 /* Default-Portrait~ipad.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,13 +519,14 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Tomoaki Nosaka";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "A3DC8FA5-CE4C-4B52-9B56-453037BBAC59";
 				SDKROOT = iphoneos;
 			};
 			name = Release;
