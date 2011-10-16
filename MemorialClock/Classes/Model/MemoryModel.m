@@ -361,7 +361,7 @@ static MemoryModel *sharedMemoryModel_ = nil;
     return UINT_MAX;
 }
 
-- (void)release
+- (oneway void)release
 {
 }
 
