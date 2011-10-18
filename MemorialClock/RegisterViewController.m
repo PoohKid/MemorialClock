@@ -50,6 +50,8 @@ typedef enum {
     [message release], message = nil;
 
     [backButton release], backButton = nil;
+    [cameraButton release], cameraButton = nil;
+    [actionButton release], actionButton = nil;
     [photoView release], photoView = nil;
     [nameTextField release], nameTextField = nil;
     [messageTextView release], messageTextView = nil;
@@ -110,6 +112,8 @@ typedef enum {
     //propertyは解放しないこと
 
     [backButton release], backButton = nil;
+    [cameraButton release], cameraButton = nil;
+    [actionButton release], actionButton = nil;
     [photoView release], photoView = nil;
     [nameTextField release], nameTextField = nil;
     [messageTextView release], messageTextView = nil;
@@ -181,7 +185,11 @@ typedef enum {
                                                                         nil] autorelease];
         appDelegate.actionSheet.tag = ActionSheetTypeCameraDisable;
     }
-    [appDelegate.actionSheet showInView:self.view];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [appDelegate.actionSheet showFromBarButtonItem:sender animated:YES];
+    } else {
+        [appDelegate.actionSheet showInView:self.view];
+    }
 }
 
 - (IBAction)tapActionButton:(id)sender
@@ -215,7 +223,11 @@ typedef enum {
                                                                         nil] autorelease];
         appDelegate.actionSheet.tag = ActionSheetTypeMailDisable;
     }
-    [appDelegate.actionSheet showInView:self.view];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [appDelegate.actionSheet showFromBarButtonItem:sender animated:YES];
+    } else {
+        [appDelegate.actionSheet showInView:self.view];
+    }
 }
 
 #pragma mark - UITextFieldTextDidChangeNotification
@@ -310,7 +322,7 @@ typedef enum {
                 //iPad用：Popover表示
                 appDelegate.popoverController = [[[UIPopoverController alloc] initWithContentViewController:imagePickerController] autorelease];
                 appDelegate.popoverController.delegate = self;
-                [appDelegate.popoverController presentPopoverFromRect:self.view.bounds inView:self.view permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
+                [appDelegate.popoverController presentPopoverFromBarButtonItem:cameraButton permittedArrowDirections:UIPopoverArrowDirectionAny animated:YES];
             } else {
                 //iPhone用：ImagePickerをモーダル表示
                 [self presentModalViewController:imagePickerController animated:YES];

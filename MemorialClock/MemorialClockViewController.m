@@ -370,7 +370,11 @@ typedef enum {
                                              destructiveButtonTitle:nil
                                                   otherButtonTitles:NSLocalizedString(@"Delete Photo", nil), nil] autorelease];
     appDelegate.actionSheet.tag = ActionSheetTypeTrash;
-    [appDelegate.actionSheet showInView:self.view];
+    if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
+        [appDelegate.actionSheet showFromBarButtonItem:sender animated:YES];
+    } else {
+        [appDelegate.actionSheet showInView:self.view];
+    }
 }
 
 - (IBAction)tapEditButton:(id)sender

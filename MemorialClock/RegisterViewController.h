@@ -20,6 +20,8 @@
     NSString *message;
 
     IBOutlet UIBarButtonItem *backButton;
+    IBOutlet UIBarButtonItem *cameraButton;
+    IBOutlet UIBarButtonItem *actionButton;
     IBOutlet UIImageView *photoView;
     IBOutlet UITextField *nameTextField;
     IBOutlet UIPlaceHolderTextView *messageTextView;
