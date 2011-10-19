@@ -137,6 +137,21 @@ typedef enum {
     [nameTextField becomeFirstResponder];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    //iPadはActionShhetがポップオーバー表示中でも画面遷移できてしまうので閉じる
+    MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+    if (appDelegate.actionSheet.visible) {
+        [appDelegate.actionSheet dismissWithClickedButtonIndex:appDelegate.actionSheet.cancelButtonIndex animated:NO];
+        appDelegate.actionSheet = nil;
+    }
+    //ImagePickerも閉じる
+    if (appDelegate.popoverController) {
+        [appDelegate.popoverController dismissPopoverAnimated:NO];
+        appDelegate.popoverController = nil;
+    }
+}
+
 - (void)viewDidDisappear:(BOOL)animated
 {
     //UITextField, UITextView変更の通知を終了
@@ -167,6 +182,25 @@ typedef enum {
     GA_TRACK_METHOD
 
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
+    //既に表示中のImagePickerを閉じる
+    if (appDelegate.popoverController) {
+        [appDelegate.popoverController dismissPopoverAnimated:YES];
+        appDelegate.popoverController = nil;
+        return; //ImagePickerは自ボタンからの遷移なので閉じて終了
+    }
+    //既に表示中のActionSheetを閉じる
+    if (appDelegate.actionSheet.visible) {
+        NSInteger fromTag = appDelegate.actionSheet.tag;
+        [appDelegate.actionSheet dismissWithClickedButtonIndex:appDelegate.actionSheet.cancelButtonIndex animated:YES];
+        appDelegate.actionSheet = nil;
+        //同一のActionSheetなら閉じて終了、別のActionSheetなら新規に開く
+        if (fromTag == ActionSheetTypeCameraEnable ||
+            fromTag == ActionSheetTypeCameraDisable) {
+            return;
+        }
+    }
+
     if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
         appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                                delegate:self
@@ -205,6 +239,24 @@ typedef enum {
 	}
 
     MemorialClockAppDelegate *appDelegate = [UIApplication sharedApplication].delegate;
+
+    //既に表示中のImagePickerを閉じる
+    if (appDelegate.popoverController) {
+        [appDelegate.popoverController dismissPopoverAnimated:YES];
+        appDelegate.popoverController = nil;
+    }
+    //既に表示中のActionSheetを閉じる
+    if (appDelegate.actionSheet.visible) {
+        NSInteger fromTag = appDelegate.actionSheet.tag;
+        [appDelegate.actionSheet dismissWithClickedButtonIndex:appDelegate.actionSheet.cancelButtonIndex animated:YES];
+        appDelegate.actionSheet = nil;
+        //同一のActionSheetなら閉じて終了、別のActionSheetなら新規に開く
+        if (fromTag == ActionSheetTypeMailEnable ||
+            fromTag == ActionSheetTypeMailDisable) {
+            return;
+        }
+    }
+
     if (canSendMail) {
         appDelegate.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
                                                                delegate:self
