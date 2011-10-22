@@ -197,6 +197,7 @@ typedef enum {
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    currentMemoryId_ = -1; //画面遷移した場合は同一IDでも再描画したいので現IDをクリア（登録1件のときに編集内容が反映されない問題に対応）
     [self startTimer];
 }
 
