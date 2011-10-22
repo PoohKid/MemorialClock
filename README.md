@@ -24,3 +24,7 @@
     + フォトフレーム,写真,卒業,アルバム,卒業アルバム,美人時計,時計
 + Copyright
     + PoohKid & maasa
+
+## Screenshotsで使用している写真素材
+* [Graduation Stock Photo - Royalty Free Image from FreeDigitalPhotos.net](http://www.freedigitalphotos.net/images/Learning_g376-Graduation_p56077.html)  
+* [高校生 学生 卒業 女子高生 [2184689] - 写真素材 PIXTA](http://pixta.jp/photo/2184689)
