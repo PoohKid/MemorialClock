@@ -30,8 +30,12 @@
                                            dispatchPeriod:[[DeveloperInfo sharedDeveloperInfo] googleAnalyticsDispatchPeriod]
                                                  delegate:nil];
 
-    //自動ロックをOFF
-    [UIApplication sharedApplication].idleTimerDisabled = YES;
+    //Register for battery state change notifications.
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(batteryStateDidChange:)
+                                                 name:UIDeviceBatteryStateDidChangeNotification object:nil];
+    //バッテリのモニタリングを有効にする
+    [UIDevice currentDevice].batteryMonitoringEnabled = YES;
 
     self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
@@ -135,6 +139,9 @@
     /*
      Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
      */
+
+    //スリープやバックグラウンドからアプリケーションに復帰のタイミングでBatteryStatusを再チェック
+    [self resetIdleTimerDisabled];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
@@ -152,6 +159,31 @@
     [_window release];
     [_viewController release];
     [super dealloc];
+}
+
+//--------------------------------------------------------------//
+#pragma mark -- public methods --
+//--------------------------------------------------------------//
+
+- (void)resetIdleTimerDisabled
+{
+    switch ([UIDevice currentDevice].batteryState) {
+        case UIDeviceBatteryStateUnknown:
+        case UIDeviceBatteryStateUnplugged: //on battery, discharging
+            [UIApplication sharedApplication].idleTimerDisabled = NO;
+            break;
+        case UIDeviceBatteryStateCharging:  //plugged in, less than 100%
+        case UIDeviceBatteryStateFull:      //plugged in, at 100%
+            [UIApplication sharedApplication].idleTimerDisabled = YES;
+            break;
+    }
+}
+
+#pragma mark - Battery notifications
+
+- (void)batteryStateDidChange:(NSNotification *)notification
+{
+    [self resetIdleTimerDisabled];
 }
 
 @end

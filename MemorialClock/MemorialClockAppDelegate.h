@@ -24,4 +24,6 @@
 @property (nonatomic, retain) UIActionSheet *actionSheet;
 @property (nonatomic, retain) UIPopoverController *popoverController;
 
+- (void)resetIdleTimerDisabled;
+
 @end
