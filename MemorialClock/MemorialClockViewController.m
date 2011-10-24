@@ -133,6 +133,12 @@ typedef enum {
     photoPane1.alpha = 0;
     photoPane2.alpha = 0;
 
+    //ナビゲーションバー、ツールバーの色を指定（半透明）
+    navigationBar.tintColor = [UIColor colorWithRed:180/255.0 green:220/255.0 blue:243/255.0 alpha:1];
+    navigationBar.translucent = YES;
+    toolBar.tintColor = [UIColor colorWithRed:180/255.0 green:220/255.0 blue:243/255.0 alpha:1];
+    toolBar.translucent = YES;
+
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
         //角丸設定
         messageBackground1.layer.cornerRadius = 20;

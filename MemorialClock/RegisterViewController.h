@@ -19,6 +19,7 @@
     NSString *name;
     NSString *message;
 
+    IBOutlet UIToolbar *toolBar;
     IBOutlet UIBarButtonItem *backButton;
     IBOutlet UIBarButtonItem *cameraButton;
     IBOutlet UIBarButtonItem *actionButton;

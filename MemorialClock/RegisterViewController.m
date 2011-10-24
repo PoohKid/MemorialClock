@@ -49,6 +49,7 @@ typedef enum {
     [name release], name = nil;
     [message release], message = nil;
 
+    [toolBar release], toolBar = nil;
     [backButton release], backButton = nil;
     [cameraButton release], cameraButton = nil;
     [actionButton release], actionButton = nil;
@@ -75,6 +76,10 @@ typedef enum {
 
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
+
+    //ツールバーの色を指定（半透明）
+    toolBar.tintColor = [UIColor colorWithRed:180/255.0 green:220/255.0 blue:243/255.0 alpha:1];
+    toolBar.translucent = YES;
 
     backButton.title = NSLocalizedString(@"Back", nil);
 
@@ -111,6 +116,7 @@ typedef enum {
 
     //propertyは解放しないこと
 
+    [toolBar release], toolBar = nil;
     [backButton release], backButton = nil;
     [cameraButton release], cameraButton = nil;
     [actionButton release], actionButton = nil;

@@ -285,9 +285,9 @@
 				054472861426904400392985 /* RegisterViewController.h */,
 				054472871426904400392985 /* RegisterViewController.m */,
 				054472851426904400392985 /* RegisterViewController.xib */,
+				05B101CB143C89B600EA2896 /* iPad */,
 				05B772C2142253B1008A0B5D /* Supporting Files */,
 				054472881426904400392985 /* Resources */,
-				05B101CB143C89B600EA2896 /* iPad */,
 			);
 			path = MemorialClock;
 			sourceTree = "<group>";
