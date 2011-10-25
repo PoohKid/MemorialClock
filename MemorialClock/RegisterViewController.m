@@ -78,7 +78,7 @@ typedef enum {
     // Do any additional setup after loading the view from its nib.
 
     //ツールバーの色を指定（半透明）
-    toolBar.tintColor = [UIColor colorWithRed:180/255.0 green:220/255.0 blue:243/255.0 alpha:1];
+    toolBar.tintColor = [UIColor colorWithRed:140/255.0 green:199/255.0 blue:224/255.0 alpha:1];
     toolBar.translucent = YES;
 
     backButton.title = NSLocalizedString(@"Back", nil);
