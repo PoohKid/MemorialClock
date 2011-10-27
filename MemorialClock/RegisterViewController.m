@@ -448,9 +448,21 @@ typedef enum {
                         [mailComposeViewController setSubject:NSLocalizedString(@"OurMemories", nil)];
 
                         //メール本文を設定
+                        NSString *messageString = @"";
+                        if (NO) {
+                        } else if ([nameTextField.text length] > 0 && [messageTextView.text length] > 0) {  //name + message
+                            messageString = [NSString stringWithFormat:@"%@\n%@", nameTextField.text, messageTextView.text];
+                        } else if ([nameTextField.text length] > 0) {
+                            messageString = [NSString stringWithFormat:@"%@", nameTextField.text];      //name のみ
+                        } else if ([messageTextView.text length] > 0) {
+                            messageString = [NSString stringWithFormat:@"%@", messageTextView.text];    //message のみ
+                        }
                         NSString *messageBody;
                         if (photoView.image) {
                             messageBody = [NSString stringWithFormat:
+                                           @"%@\n"
+                                           @"\n"
+                                           @"----\n"
                                            @"%@\n"
                                            @"\n"
                                            @"%@\n"
@@ -459,7 +471,8 @@ typedef enum {
                                            @"%@\n"
                                            @"\n"
                                            @"memorialclock:///regist?name=%@&message=%@\n",
-                                           NSLocalizedString(@"Happy Graduation!", nil),
+                                           messageString,
+                                           NSLocalizedString(@"This email was sent from \"OurMemories\".", nil),
                                            NSLocalizedString(@"Please save your photo album first.", nil),
                                            NSLocalizedString(@"Please click the link below and then.", nil),
                                            NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
@@ -468,11 +481,15 @@ typedef enum {
                             messageBody = [NSString stringWithFormat:
                                            @"%@\n"
                                            @"\n"
+                                           @"----\n"
+                                           @"%@\n"
+                                           @"\n"
                                            @"%@\n"
                                            @"%@\n"
                                            @"\n"
                                            @"memorialclock:///regist?name=%@&message=%@\n",
-                                           NSLocalizedString(@"Happy Graduation!", nil),
+                                           messageString,
+                                           NSLocalizedString(@"This email was sent from \"OurMemories\".", nil),
                                            NSLocalizedString(@"Please click the link below.", nil),
                                            NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
                                            [nameTextField.text escapeString], [messageTextView.text escapeString]];
