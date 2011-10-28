@@ -31,10 +31,14 @@
     IBOutlet UIView *photoPane1;
     IBOutlet UIImageView *photoView1;
     IBOutlet UIView *messageBackground1;
+    IBOutlet UILabel *nameLabel1;
+    IBOutlet UIImageView *lineView1;
     IBOutlet UILabel *messageLabel1;
     IBOutlet UIView *photoPane2;
     IBOutlet UIImageView *photoView2;
     IBOutlet UIView *messageBackground2;
+    IBOutlet UILabel *nameLabel2;
+    IBOutlet UIImageView *lineView2;
     IBOutlet UILabel *messageLabel2;
 
     IBOutlet MultiADBannerView *adBannerView;

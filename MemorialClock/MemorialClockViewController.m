@@ -96,10 +96,14 @@ typedef enum {
     [photoPane1 release], photoPane1 = nil;
     [photoView1 release], photoView1 = nil;
     [messageBackground1 release], messageBackground1 = nil;
+    [nameLabel1 release], nameLabel1 = nil;
+    [lineView1 release], lineView1 = nil;
     [messageLabel1 release], messageLabel1 = nil;
     [photoPane2 release], photoPane2 = nil;
     [photoView2 release], photoView2 = nil;
     [messageBackground2 release], messageBackground2 = nil;
+    [nameLabel2 release], nameLabel2 = nil;
+    [lineView2 release], lineView2 = nil;
     [messageLabel2 release], messageLabel2 = nil;
 
     [adBannerView release], adBannerView = nil;
@@ -140,27 +144,27 @@ typedef enum {
     toolBar.translucent = YES;
 
     if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-        //角丸設定
-        messageBackground1.layer.cornerRadius = 20;
-        messageBackground2.layer.cornerRadius = 20;
-
         //フォント設定（Interface Builderから指定しても反映されないためコード上で設定）ChalkboardSE -> Noteworthy
+        nameLabel1.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize * 2];
+        nameLabel2.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize * 2];
         messageLabel1.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize * 2];
         messageLabel2.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel2.font.pointSize * 2];
 
         //影
+        nameLabel1.shadowOffset = CGSizeMake(2, 2);
+        nameLabel2.shadowOffset = CGSizeMake(2, 2);
         messageLabel1.shadowOffset = CGSizeMake(2, 2);
         messageLabel2.shadowOffset = CGSizeMake(2, 2);
     } else {
-        //角丸設定
-        messageBackground1.layer.cornerRadius = 10;
-        messageBackground2.layer.cornerRadius = 10;
-
         //フォント設定（Interface Builderから指定しても反映されないためコード上で設定）ChalkboardSE -> Noteworthy
+        nameLabel1.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize];
+        nameLabel2.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize];
         messageLabel1.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel1.font.pointSize];
         messageLabel2.font = [UIFont fontWithName:@"Noteworthy-Bold" size:messageLabel2.font.pointSize];
 
         //影
+        nameLabel1.shadowOffset = CGSizeMake(1, 1);
+        nameLabel2.shadowOffset = CGSizeMake(1, 1);
         messageLabel1.shadowOffset = CGSizeMake(1, 1);
         messageLabel2.shadowOffset = CGSizeMake(1, 1);
     }
@@ -188,10 +192,14 @@ typedef enum {
     [photoPane1 release], photoPane1 = nil;
     [photoView1 release], photoView1 = nil;
     [messageBackground1 release], messageBackground1 = nil;
+    [nameLabel1 release], nameLabel1 = nil;
+    [lineView1 release], lineView1 = nil;
     [messageLabel1 release], messageLabel1 = nil;
     [photoPane2 release], photoPane2 = nil;
     [photoView2 release], photoView2 = nil;
     [messageBackground2 release], messageBackground2 = nil;
+    [nameLabel2 release], nameLabel2 = nil;
+    [lineView2 release], lineView2 = nil;
     [messageLabel2 release], messageLabel2 = nil;
 
     [adBannerView release], adBannerView = nil;
@@ -264,11 +272,13 @@ typedef enum {
     [currentName_ release], currentName_ = [name retain];
     [currentMessage_ release], currentMessage_ = [message retain];
 
-    UIView *photoPaneFrom =     isViewFirst_ ? photoPane1 : photoPane2;
-    UIView *photoPaneTo =       isViewFirst_ ? photoPane2 : photoPane1;
-    UIImageView *photoView =    isViewFirst_ ? photoView2 : photoView1;
+    UIView *photoPaneFrom     = isViewFirst_ ? photoPane1 : photoPane2;
+    UIView *photoPaneTo       = isViewFirst_ ? photoPane2 : photoPane1;
+    UIImageView *photoView    = isViewFirst_ ? photoView2 : photoView1;
     UIView *messageBackground = isViewFirst_ ? messageBackground2 : messageBackground1;
-    UILabel *messageLabel =     isViewFirst_ ? messageLabel2 : messageLabel1;
+    UILabel *nameLabel        = isViewFirst_ ? nameLabel2 : nameLabel1;
+    UIImageView *lineView     = isViewFirst_ ? lineView2 : lineView1;
+    UILabel *messageLabel     = isViewFirst_ ? messageLabel2 : messageLabel1;
 
     //縦向きの場合はAspectFill、横向きの場合はAspectFit（標準のアルバムと同じ、はず）
     if (image.size.height > image.size.width) {
@@ -302,7 +312,7 @@ typedef enum {
         //message:    (80, 514) - 608 x 320 / 834
 
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            CGSize size = [messageString sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(608, 320)];
+            CGSize size = [message sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(608, 320)];//@56
             messageBackground.frame = CGRectMake((photoContainer.frame.size.width - (size.width + 80)) / 2,
                                                  874 - (size.height + 80),
                                                  size.width + 80, size.height + 80);
@@ -310,20 +320,41 @@ typedef enum {
                                             834 - size.height,
                                             size.width, size.height);
         } else {
-            CGSize size = [messageString sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(240, 160)];
-            messageBackground.frame = CGRectMake((photoContainer.frame.size.width - (size.width + 40)) / 2,
-                                                 366 - (size.height + 40),
-                                                 size.width + 40, size.height + 40);
-            messageLabel.frame = CGRectMake((photoContainer.frame.size.width - size.width) / 2,
-                                            346 - size.height,
-                                            size.width, size.height);
+            CGSize size = [message sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(320, 160)]; //@29
+            if (NO) {
+            } else if ([name length] > 0 && [message length] > 0) {
+                messageLabel.frame = CGRectMake(0, 386 - size.height,
+                                                320, size.height);
+                lineView.frame = CGRectMake(0, 386 - (size.height + 3),
+                                            320, 3);
+                nameLabel.frame = CGRectMake(0, 386 - (size.height + 3 + 29),
+                                             320, 29);
+                messageBackground.frame = CGRectMake(0, 386 - (size.height + 3 + 29),
+                                                     320, size.height + 3 + 29);
+            } else if ([name length] > 0) {
+                nameLabel.frame = CGRectMake(0, 386 - 29,
+                                             320, 29);
+                messageBackground.frame = CGRectMake(0, 386 - 29,
+                                                     320, 29);
+            } else if ([message length] > 0) {
+                messageLabel.frame = CGRectMake(0, 386 - size.height,
+                                                320, size.height);
+                messageBackground.frame = CGRectMake(0, 386 - (size.height),
+                                                     320, size.height);
+            }
         }
-        messageLabel.text = messageString;
+        nameLabel.text = name;
+        messageLabel.text = message;
         messageBackground.alpha = 0.5;
-        messageLabel.alpha = 1;
+        nameLabel.alpha    = ([name length] > 0) ? 1 : 0;
+        lineView.alpha     = ([name length] > 0 && [message length] > 0) ? 0.5 : 0;
+        messageLabel.alpha = ([message length] > 0) ? 1 : 0;
     } else {
-        messageLabel.text = messageString;
+        nameLabel.text = name;
+        messageLabel.text = message;
         messageBackground.alpha = 0;
+        nameLabel.alpha = 0;
+        lineView.alpha = 0;
         messageLabel.alpha = 0;
     }
 

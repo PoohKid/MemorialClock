@@ -24,6 +24,7 @@
 		054472A9142690DD00392985 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 054472A8142690DD00392985 /* libsqlite3.0.dylib */; };
 		055774F81429FABD00B28746 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 055774F71429FABD00B28746 /* README.md */; };
 		059844B11428F77C0079A1E1 /* MemorialClockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059844B21428F77C0079A1E1 /* MemorialClockViewController.xib */; };
+		059CDF8E1459B94300D94BC1 /* Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 059CDF8D1459B94300D94BC1 /* Line.png */; };
 		05A323BD1438C29A009230D1 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05A323BC1438C29A009230D1 /* MessageUI.framework */; };
 		05A323C11438C91A009230D1 /* NSString+Escape.m in Sources */ = {isa = PBXBuildFile; fileRef = 05A323C01438C91A009230D1 /* NSString+Escape.m */; };
 		05B101CE143C89B800EA2896 /* MainWindow-iPad.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05B101CC143C89B800EA2896 /* MainWindow-iPad.xib */; };
@@ -81,6 +82,7 @@
 		054472A8142690DD00392985 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
 		055774F71429FABD00B28746 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		059844B21428F77C0079A1E1 /* MemorialClockViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemorialClockViewController.xib; sourceTree = "<group>"; };
+		059CDF8D1459B94300D94BC1 /* Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Line.png; sourceTree = "<group>"; };
 		05A323BC1438C29A009230D1 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
 		05A323BF1438C91A009230D1 /* NSString+Escape.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Escape.h"; sourceTree = "<group>"; };
 		05A323C01438C91A009230D1 /* NSString+Escape.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Escape.m"; sourceTree = "<group>"; };
@@ -155,6 +157,7 @@
 		054472881426904400392985 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				059CDF8D1459B94300D94BC1 /* Line.png */,
 				054472891426904400392985 /* Icon.png */,
 				0544728A1426904400392985 /* Icon@2x.png */,
 				8440F9FE1446A14E00B4BCB3 /* Icon-72.png */,
@@ -410,6 +413,7 @@
 				84F1970714459C5800D900F4 /* Default@2x.png in Resources */,
 				8440F9FF1446A14E00B4BCB3 /* Icon-72.png in Resources */,
 				052D771C1447CBDC009333F8 /* Default-Portrait~ipad.png in Resources */,
+				059CDF8E1459B94300D94BC1 /* Line.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
