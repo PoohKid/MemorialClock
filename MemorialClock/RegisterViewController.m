@@ -464,18 +464,38 @@ typedef enum {
                                            @"\n"
                                            @"----\n"
                                            @"%@\n"
-                                           @"\n"
+                                           @"%@\n"
                                            @"%@\n"
                                            @"\n"
+                                           @"%@\n"
+                                           @"1.%@\n"
+                                           @"2.%@\n"
+                                           @"3.%@\n"
+                                           @"4.%@\n"
+                                           @"5.%@\n"
+                                           @"6.%@\n"
+                                           @"7.%@\n"
+                                           @"\n"
+                                           @"%@\n"
                                            @"%@\n"
                                            @"%@\n"
                                            @"\n"
                                            @"memorialclock:///regist?name=%@&message=%@\n",
                                            messageString,
-                                           NSLocalizedString(@"This email was sent from \"OurMemories\".", nil),
-                                           NSLocalizedString(@"Please save your photo album first.", nil),
-                                           NSLocalizedString(@"Please click the link below and then.", nil),
-                                           NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
+                                           NSLocalizedString(@"MailBody 1", nil),
+                                           NSLocalizedString(@"MailBody 2", nil),
+                                           NSLocalizedString(@"MailBody 3", nil),
+                                           NSLocalizedString(@"HowToUse title", nil),
+                                           NSLocalizedString(@"HowToUse 1", nil),
+                                           NSLocalizedString(@"HowToUse 2", nil),
+                                           NSLocalizedString(@"HowToUse 3", nil),
+                                           NSLocalizedString(@"HowToUse 4", nil),
+                                           NSLocalizedString(@"HowToUse 5", nil),
+                                           NSLocalizedString(@"HowToUse 6", nil),
+                                           NSLocalizedString(@"HowToUse 7", nil),
+                                           NSLocalizedString(@"HowToUse footer 1", nil),
+                                           NSLocalizedString(@"HowToUse footer 2", nil),
+                                           NSLocalizedString(@"HowToUse footer 3", nil),
                                            [nameTextField.text escapeString], [messageTextView.text escapeString]];
                         } else {
                             messageBody = [NSString stringWithFormat:
@@ -483,15 +503,34 @@ typedef enum {
                                            @"\n"
                                            @"----\n"
                                            @"%@\n"
+                                           @"%@\n"
+                                           @"%@\n"
                                            @"\n"
+                                           @"%@\n"
+                                           @"1.%@\n"
+                                           @"2.%@\n"
+                                           @"3.%@\n"
+                                           @"4.%@\n"
+                                           @"5.%@\n"
+                                           @"\n"
+                                           @"%@\n"
                                            @"%@\n"
                                            @"%@\n"
                                            @"\n"
                                            @"memorialclock:///regist?name=%@&message=%@\n",
                                            messageString,
-                                           NSLocalizedString(@"This email was sent from \"OurMemories\".", nil),
-                                           NSLocalizedString(@"Please click the link below.", nil),
-                                           NSLocalizedString(@"Then \"OurMemories\" open the registration screen.", nil),
+                                           NSLocalizedString(@"MailBody 1", nil),
+                                           NSLocalizedString(@"MailBody 2", nil),
+                                           NSLocalizedString(@"MailBody 3", nil),
+                                           NSLocalizedString(@"HowToUse title", nil),
+                                           NSLocalizedString(@"HowToUse 1", nil),
+                                           NSLocalizedString(@"HowToUse 3", nil),
+                                           NSLocalizedString(@"HowToUse 4", nil),
+                                           NSLocalizedString(@"HowToUse 6", nil),
+                                           NSLocalizedString(@"HowToUse 7", nil),
+                                           NSLocalizedString(@"HowToUse footer 1", nil),
+                                           NSLocalizedString(@"HowToUse footer 2", nil),
+                                           NSLocalizedString(@"HowToUse footer 3", nil),
                                            [nameTextField.text escapeString], [messageTextView.text escapeString]];
                         }
                         [mailComposeViewController setMessageBody:messageBody isHTML:NO];
