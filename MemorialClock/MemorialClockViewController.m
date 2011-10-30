@@ -290,74 +290,51 @@ typedef enum {
     }
     photoView.image = image;
 
-    //メッセージ表示内容を作成
-    NSString *messageString = nil;
-    if (NO) {
-    } else if ([name length] > 0 && [message length] > 0) {
-        messageString = [NSString stringWithFormat:@"%@\n\n%@", name, message]; //name + message
-    } else if ([name length] > 0) {
-        messageString = [NSString stringWithFormat:@"%@", name];    //name のみ
-    } else if ([message length] > 0) {
-        messageString = [NSString stringWithFormat:@"%@", message]; //message のみ
-    }
-
     //メッセージsizeおよび内容を設定、表示／非表示を切り替え
-    if (messageString) {
-        //デザイン時
-        //background: (20, 166) - 280 x 200 / 366 (ToolBar: 386)
-        //message:    (40, 186) - 240 x 160 / 346
-
-        //iPad
-        //background: (40, 474) - 688 x 400 / 874 (ToolBar: 914)
-        //message:    (80, 514) - 608 x 320 / 834
-
+    if ([name length] > 0 || [message length] > 0) {
+        //size算出
+        CGSize size;
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
-            CGSize size = [message sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(608, 320)];//@56
-            messageBackground.frame = CGRectMake((photoContainer.frame.size.width - (size.width + 80)) / 2,
-                                                 874 - (size.height + 80),
-                                                 size.width + 80, size.height + 80);
-            messageLabel.frame = CGRectMake((photoContainer.frame.size.width - size.width) / 2,
-                                            834 - size.height,
-                                            size.width, size.height);
+            size = [message sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(768, 320)]; //@56
         } else {
-            CGSize size = [message sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(320, 160)]; //@29
-            if (NO) {
-            } else if ([name length] > 0 && [message length] > 0) {
-                messageLabel.frame = CGRectMake(0, 386 - size.height,
-                                                320, size.height);
-                lineView.frame = CGRectMake(0, 386 - (size.height + 3),
-                                            320, 3);
-                nameLabel.frame = CGRectMake(0, 386 - (size.height + 3 + 29),
-                                             320, 29);
-                messageBackground.frame = CGRectMake(0, 386 - (size.height + 3 + 29),
-                                                     320, size.height + 3 + 29);
-            } else if ([name length] > 0) {
-                nameLabel.frame = CGRectMake(0, 386 - 29,
-                                             320, 29);
-                messageBackground.frame = CGRectMake(0, 386 - 29,
-                                                     320, 29);
-            } else if ([message length] > 0) {
-                messageLabel.frame = CGRectMake(0, 386 - size.height,
-                                                320, size.height);
-                messageBackground.frame = CGRectMake(0, 386 - (size.height),
-                                                     320, size.height);
-            }
+            size = [message sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(320, 160)]; //@29
         }
-        nameLabel.text = name;
-        messageLabel.text = message;
+
+        //frame設定
+        float width = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? 768 : 320;
+        float top = toolBar.frame.origin.y;
+        if ([message length] > 0) {
+            top -= size.height;
+            messageLabel.frame = CGRectMake(0, top, width, size.height);
+        }
+        if ([name length] > 0 && [message length] > 0) {
+            top -= lineView.frame.size.height;
+            lineView.frame = CGRectMake(0, top, width, lineView.frame.size.height);
+        }
+        if ([name length] > 0) {
+            top -= nameLabel.frame.size.height;
+            nameLabel.frame = CGRectMake(0, top, width, nameLabel.frame.size.height);
+        }
+        messageBackground.frame = CGRectMake(0, top, width, toolBar.frame.origin.y - top);
+
+        //text, alpha設定
+        nameLabel.text          = name;
+        messageLabel.text       = message;
         messageBackground.alpha = 0.5;
-        nameLabel.alpha    = ([name length] > 0) ? 1 : 0;
-        lineView.alpha     = ([name length] > 0 && [message length] > 0) ? 0.5 : 0;
-        messageLabel.alpha = ([message length] > 0) ? 1 : 0;
+        nameLabel.alpha         = ([name length] > 0) ? 1 : 0;
+        lineView.alpha          = ([name length] > 0 && [message length] > 0) ? 0.5 : 0;
+        messageLabel.alpha      = ([message length] > 0) ? 1 : 0;
     } else {
-        nameLabel.text = name;
-        messageLabel.text = message;
+        //text, alpha設定
+        nameLabel.text          = name;
+        messageLabel.text       = message;
         messageBackground.alpha = 0;
-        nameLabel.alpha = 0;
-        lineView.alpha = 0;
-        messageLabel.alpha = 0;
+        nameLabel.alpha         = 0;
+        lineView.alpha          = 0;
+        messageLabel.alpha      = 0;
     }
 
+    //切り替えアニメーション
     [UIView animateWithDuration:0.5f
                      animations:^{
                          photoPaneFrom.alpha = 0;
