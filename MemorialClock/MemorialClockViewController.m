@@ -297,32 +297,7 @@ typedef enum {
         if (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) {
             size = [message sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(768, 320)]; //@56
         } else {
-<<<<<<< HEAD
             size = [message sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(320, 160)]; //@29
-=======
-            CGSize size = [message sizeWithFont:messageLabel.font constrainedToSize:CGSizeMake(320, 160)]; //@29
-            if (NO) {
-            } else if ([name length] > 0 && [message length] > 0) {
-                messageLabel.frame = CGRectMake(0, 386 - size.height,
-                                                320, size.height);
-                lineView.frame = CGRectMake(10, 386 - (size.height + 3),
-                                            300, 3);
-                nameLabel.frame = CGRectMake(0, 386 - (size.height + 3 + 29),
-                                             320, 29);
-                messageBackground.frame = CGRectMake(0, 386 - (size.height + 3 + 29),
-                                                     320, size.height + 3 + 29);
-            } else if ([name length] > 0) {
-                nameLabel.frame = CGRectMake(0, 386 - 29,
-                                             320, 29);
-                messageBackground.frame = CGRectMake(0, 386 - 29,
-                                                     320, 29);
-            } else if ([message length] > 0) {
-                messageLabel.frame = CGRectMake(0, 386 - size.height,
-                                                320, size.height);
-                messageBackground.frame = CGRectMake(0, 386 - (size.height),
-                                                     320, size.height);
-            }
->>>>>>> closed #30
         }
 
         //frame設定
@@ -334,7 +309,7 @@ typedef enum {
         }
         if ([name length] > 0 && [message length] > 0) {
             top -= lineView.frame.size.height;
-            lineView.frame = CGRectMake(0, top, width, lineView.frame.size.height);
+            lineView.frame = CGRectMake(lineView.frame.origin.x, top, lineView.frame.size.width, lineView.frame.size.height);
         }
         if ([name length] > 0) {
             top -= nameLabel.frame.size.height;
@@ -346,15 +321,9 @@ typedef enum {
         nameLabel.text          = name;
         messageLabel.text       = message;
         messageBackground.alpha = 0.5;
-<<<<<<< HEAD
         nameLabel.alpha         = ([name length] > 0) ? 1 : 0;
         lineView.alpha          = ([name length] > 0 && [message length] > 0) ? 0.5 : 0;
         messageLabel.alpha      = ([message length] > 0) ? 1 : 0;
-=======
-        nameLabel.alpha    = ([name length] > 0) ? 1 : 0;
-        lineView.alpha     = ([name length] > 0 && [message length] > 0) ? 0.3 : 0;
-        messageLabel.alpha = ([message length] > 0) ? 1 : 0;
->>>>>>> closed #30
     } else {
         //text, alpha設定
         nameLabel.text          = name;

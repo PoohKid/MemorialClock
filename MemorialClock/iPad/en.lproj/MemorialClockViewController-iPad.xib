@@ -118,7 +118,7 @@
 									<object class="IBUIImageView" id="315884309">
 										<reference key="NSNextResponder" ref="640457818"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{0, 570}, {768, 6}}</string>
+										<string key="NSFrame">{{20, 570}, {728, 6}}</string>
 										<reference key="NSSuperview" ref="640457818"/>
 										<reference key="NSNextKeyView" ref="158884806"/>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
@@ -172,7 +172,7 @@
 										<int key="NSvFlags">274</int>
 										<string key="NSFrameSize">{768, 1024}</string>
 										<reference key="NSSuperview" ref="703293495"/>
-										<reference key="NSNextKeyView" ref="51054949"/>
+										<reference key="NSNextKeyView" ref="642526291"/>
 										<int key="IBUIContentMode">1</int>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBIPadFramework</string>
@@ -195,7 +195,7 @@
 										<int key="NSvFlags">292</int>
 										<string key="NSFrame">{{80, 514}, {608, 56}}</string>
 										<reference key="NSSuperview" ref="703293495"/>
-										<reference key="NSNextKeyView" ref="1045838314"/>
+										<reference key="NSNextKeyView" ref="51054949"/>
 										<bool key="IBUIOpaque">NO</bool>
 										<bool key="IBUIClipsSubviews">YES</bool>
 										<int key="IBUIContentMode">7</int>
@@ -219,9 +219,9 @@
 									<object class="IBUIImageView" id="51054949">
 										<reference key="NSNextResponder" ref="703293495"/>
 										<int key="NSvFlags">292</int>
-										<string key="NSFrame">{{0, 570}, {768, 6}}</string>
+										<string key="NSFrame">{{20, 570}, {728, 6}}</string>
 										<reference key="NSSuperview" ref="703293495"/>
-										<reference key="NSNextKeyView" ref="642526291"/>
+										<reference key="NSNextKeyView" ref="1045838314"/>
 										<bool key="IBUIUserInteractionEnabled">NO</bool>
 										<string key="targetRuntimeIdentifier">IBIPadFramework</string>
 										<reference key="IBUIImage" ref="719571523"/>
@@ -5249,7 +5249,7 @@ AAgAAAAIAAIACAACAAAAAgAAAAEAAQABAAE</bytes>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NS.key.0">Line.png</string>
-			<string key="NS.object.0">{320, 3}</string>
+			<string key="NS.object.0">{300, 3}</string>
 		</object>
 		<string key="IBCocoaTouchPluginVersion">933</string>
 	</data>
