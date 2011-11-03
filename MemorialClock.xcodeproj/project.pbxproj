@@ -24,8 +24,6 @@
 		054472A9142690DD00392985 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 054472A8142690DD00392985 /* libsqlite3.0.dylib */; };
 		05475A5F1462566100E12507 /* ADBanner-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 05475A5B1462566100E12507 /* ADBanner-iPad.png */; };
 		05475A601462566100E12507 /* ADBanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 05475A5D1462566100E12507 /* ADBanner.png */; };
-		05475A641462567900E12507 /* ADBanner-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 05475A5B1462566100E12507 /* ADBanner-iPad.png */; };
-		05475A651462567900E12507 /* ADBanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 05475A5D1462566100E12507 /* ADBanner.png */; };
 		055774F81429FABD00B28746 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 055774F71429FABD00B28746 /* README.md */; };
 		059844B11428F77C0079A1E1 /* MemorialClockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059844B21428F77C0079A1E1 /* MemorialClockViewController.xib */; };
 		059CDF8E1459B94300D94BC1 /* Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 059CDF8D1459B94300D94BC1 /* Line.png */; };
@@ -426,8 +424,6 @@
 				059CDF8E1459B94300D94BC1 /* Line.png in Resources */,
 				05475A5F1462566100E12507 /* ADBanner-iPad.png in Resources */,
 				05475A601462566100E12507 /* ADBanner.png in Resources */,
-				05475A641462567900E12507 /* ADBanner-iPad.png in Resources */,
-				05475A651462567900E12507 /* ADBanner.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

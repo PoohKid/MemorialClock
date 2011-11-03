@@ -19,6 +19,7 @@
     NSString *currentName_;
     NSString *currentMessage_;
     BOOL isViewFirst_;
+    BOOL isBarHidden_;
 
     IBOutlet UINavigationBar *navigationBar;
     IBOutlet UINavigationItem *navigationItem;

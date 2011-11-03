@@ -84,6 +84,8 @@ typedef enum {
     backButton.title = NSLocalizedString(@"Back", nil);
 
     //Photo初期表示
+    photoView.contentMode = (self.photoImage.size.height > self.photoImage.size.width) ? UIViewContentModeScaleAspectFill
+                                                                                       : UIViewContentModeScaleAspectFit;
     photoView.image = self.photoImage;
 
     //Name初期表示＋プレースホルダ（ImagePicker表示中にUnloadされることがあるので、入力内容の通知を受けプロパティに保持する）
@@ -585,7 +587,8 @@ typedef enum {
     UIGraphicsBeginImageContext(CGSizeMake(resize_w, resize_h));
     [image drawInRect:CGRectMake(0, 0, resize_w, resize_h)];
     self.photoImage = UIGraphicsGetImageFromCurrentImageContext();
-    photoView.contentMode = (self.photoImage.size.height > self.photoImage.size.width) ? UIViewContentModeScaleAspectFill : UIViewContentModeScaleAspectFit;
+    photoView.contentMode = (self.photoImage.size.height > self.photoImage.size.width) ? UIViewContentModeScaleAspectFill
+                                                                                       : UIViewContentModeScaleAspectFit;
     photoView.image = self.photoImage;
     UIGraphicsEndImageContext();
 }

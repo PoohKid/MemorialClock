@@ -28,6 +28,7 @@ typedef enum {
 
 @interface MemorialClockViewController (Private)
 - (void)changeMemory;
+- (void)changeMemoryForce:(BOOL)force;
 @end
 
 @implementation MemorialClockViewController
@@ -133,6 +134,7 @@ typedef enum {
     //初期化
     currentMemoryId_ = -1; //0はデフォルト画像
     isViewFirst_ = YES;
+    isBarHidden_ = NO;
 
     photoPane1.alpha = 0;
     photoPane2.alpha = 0;
@@ -173,6 +175,15 @@ typedef enum {
     UIImage *bannerImage = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? [UIImage imageNamed:@"ADBanner-iPad.png"]
                                                                                   : [UIImage imageNamed:@"ADBanner.png"];
     [adBannerView initBannerWithTitle:NSLocalizedString(@"OurMemories", nil) image:bannerImage rootViewContoller:self];
+
+    //GestureRecognizer登録
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tapPhoto:)];
+    [photoContainer addGestureRecognizer:tapGesture];
+    [tapGesture release];
+    UISwipeGestureRecognizer *swipeGesture = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(swipePhoto:)];
+    swipeGesture.direction = UISwipeGestureRecognizerDirectionLeft;
+    [photoContainer addGestureRecognizer:swipeGesture];
+    [swipeGesture release];
 }
 
 - (void)viewDidUnload
@@ -247,6 +258,11 @@ typedef enum {
 
 - (void)changeMemory
 {
+    [self changeMemoryForce:NO];
+}
+
+- (void)changeMemoryForce:(BOOL)force
+{
     NSDictionary *memory = [[MemoryModel sharedMemoryModel] nextMemory];
     int memoryId = [[memory objectForKey:@"memory_id"] intValue];
     NSString *name = [memory objectForKeyNull:@"name"];
@@ -265,7 +281,7 @@ typedef enum {
         return;
     }
     */
-    if (memoryId == currentMemoryId_) {
+    if (force == NO && memoryId == currentMemoryId_) {
         //同一のため変更なし
         return;
     }
@@ -337,11 +353,36 @@ typedef enum {
     }
 
     //切り替えアニメーション
-    [UIView animateWithDuration:0.5f
-                     animations:^{
-                         photoPaneFrom.alpha = 0;
-                         photoPaneTo.alpha = 1;
-                     }];
+    if (force) {
+        //スワイプによる切り替え：TransitionFromRight
+        photoPaneFrom.alpha = 1;
+        photoPaneTo.alpha = 1;
+        CGRect frameTo = photoPaneTo.frame;
+        frameTo.origin.x = frameTo.size.width;
+        photoPaneTo.frame = frameTo;
+        [UIView animateWithDuration:0.5f
+                         animations:^{
+                             CGRect frameFrom = photoPaneFrom.frame;
+                             CGRect frameTo = photoPaneTo.frame;
+                             frameFrom.origin.x = frameFrom.size.width * -1;
+                             frameTo.origin.x = 0;
+                             photoPaneFrom.frame = frameFrom;
+                             photoPaneTo.frame = frameTo;
+                         }completion:^(BOOL finished){
+                             photoPaneFrom.alpha = 0;
+                             photoPaneTo.alpha = 1;
+                             CGRect frameFrom = photoPaneFrom.frame;
+                             frameFrom.origin.x = 0;
+                             photoPaneFrom.frame = frameFrom;
+                         }];
+    } else {
+        //時間による切り替え：CrossDissolve
+        [UIView animateWithDuration:0.5f
+                         animations:^{
+                             photoPaneFrom.alpha = 0;
+                             photoPaneTo.alpha = 1;
+                         }];
+    }
 
     //ボタンの有効・無効を設定
     BOOL enabled = (currentMemoryId_ == 0) ? NO : YES;
@@ -434,6 +475,43 @@ typedef enum {
     registerViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     [self presentModalViewController:registerViewController animated:YES];
     [registerViewController release];
+}
+
+#pragma mark -
+#pragma mark === Touch handling  ===
+#pragma mark
+
+- (void)tapPhoto:(UIPanGestureRecognizer *)gestureRecognizer
+{
+    //NSLog(@"tapPhoto");
+
+    //説明画像を表示してる場合は非表示しない
+    if (currentMemoryId_ == 0) {
+        return;
+    }
+
+    //バー表示／非表示切り替え
+    isBarHidden_ = !isBarHidden_;
+    CGFloat alpha = isBarHidden_ ? 0 : 1;
+    [UIView animateWithDuration:0.5
+                     animations:^{
+                         navigationBar.alpha = alpha;
+                         toolBar.alpha = alpha;
+                         adBannerView.alpha = alpha;
+                     }];
+}
+
+- (void)swipePhoto:(UISwipeGestureRecognizer *)gestureRecognizer
+{
+    //NSLog(@"swipePhoto");
+    
+    //説明画像を表示してる場合は切り替えない
+    if (currentMemoryId_ == 0) {
+        return;
+    }
+
+    //画像を切り替え
+    [self changeMemoryForce:YES];
 }
 
 #pragma mark - UIAlertViewDelegate
