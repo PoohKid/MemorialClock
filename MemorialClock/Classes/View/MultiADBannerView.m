@@ -52,15 +52,18 @@
     [contentView release], contentView = nil;
     [emptyView release], emptyView = nil;
     [emptyLabel release], emptyLabel = nil;
+    [emptyImageView release], emptyImageView = nil;
 
     [super dealloc];
 }
 
 #pragma mark - Public Methods
 
-- (void)initBannerWithTitle:(NSString *)title rootViewContoller:(UIViewController *)rootViewController
+- (void)initBannerWithTitle:(NSString *)title image:(UIImage *)image rootViewContoller:(UIViewController *)rootViewController
 {
     emptyLabel.text = title;
+    emptyImageView.image = image;
+    emptyImageView.hidden = (image == nil);
     //return; //for ScreenShot
 
     //iAd

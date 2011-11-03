@@ -22,6 +22,7 @@ typedef enum {
     IBOutlet UIView *contentView;
     IBOutlet UIView *emptyView;
     IBOutlet UILabel *emptyLabel;
+    IBOutlet UIImageView *emptyImageView;
 
     AdBannerState adBannerState_;
     BOOL isIAdValid_;
@@ -32,6 +33,6 @@ typedef enum {
     GADBannerView *adMobBannerView_;
 }
 
-- (void)initBannerWithTitle:(NSString *)title rootViewContoller:(UIViewController *)rootViewController;
+- (void)initBannerWithTitle:(NSString *)title image:(UIImage *)image rootViewContoller:(UIViewController *)rootViewController;
 
 @end

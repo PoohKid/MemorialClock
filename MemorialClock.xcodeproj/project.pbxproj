@@ -22,6 +22,10 @@
 		054472A61426908600392985 /* FMResultSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 0544729E1426908600392985 /* FMResultSet.m */; };
 		054472A71426908600392985 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 054472A11426908600392985 /* UIPlaceHolderTextView.m */; };
 		054472A9142690DD00392985 /* libsqlite3.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 054472A8142690DD00392985 /* libsqlite3.0.dylib */; };
+		05475A5F1462566100E12507 /* ADBanner-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 05475A5B1462566100E12507 /* ADBanner-iPad.png */; };
+		05475A601462566100E12507 /* ADBanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 05475A5D1462566100E12507 /* ADBanner.png */; };
+		05475A641462567900E12507 /* ADBanner-iPad.png in Resources */ = {isa = PBXBuildFile; fileRef = 05475A5B1462566100E12507 /* ADBanner-iPad.png */; };
+		05475A651462567900E12507 /* ADBanner.png in Resources */ = {isa = PBXBuildFile; fileRef = 05475A5D1462566100E12507 /* ADBanner.png */; };
 		055774F81429FABD00B28746 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 055774F71429FABD00B28746 /* README.md */; };
 		059844B11428F77C0079A1E1 /* MemorialClockViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 059844B21428F77C0079A1E1 /* MemorialClockViewController.xib */; };
 		059CDF8E1459B94300D94BC1 /* Line.png in Resources */ = {isa = PBXBuildFile; fileRef = 059CDF8D1459B94300D94BC1 /* Line.png */; };
@@ -80,6 +84,10 @@
 		054472A01426908600392985 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		054472A11426908600392985 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		054472A8142690DD00392985 /* libsqlite3.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.0.dylib; path = usr/lib/libsqlite3.0.dylib; sourceTree = SDKROOT; };
+		05475A5C1462566100E12507 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = "en.lproj/ADBanner-iPad.png"; sourceTree = "<group>"; };
+		05475A5E1462566100E12507 /* en */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = en; path = en.lproj/ADBanner.png; sourceTree = "<group>"; };
+		05475A621462567900E12507 /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = "ja.lproj/ADBanner-iPad.png"; sourceTree = "<group>"; };
+		05475A631462567900E12507 /* ja */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = ja; path = ja.lproj/ADBanner.png; sourceTree = "<group>"; };
 		055774F71429FABD00B28746 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.md; sourceTree = SOURCE_ROOT; };
 		059844B21428F77C0079A1E1 /* MemorialClockViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemorialClockViewController.xib; sourceTree = "<group>"; };
 		059CDF8D1459B94300D94BC1 /* Line.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Line.png; sourceTree = "<group>"; };
@@ -167,6 +175,8 @@
 				052D771B1447CBDC009333F8 /* Default-Portrait~ipad.png */,
 				0544728B1426904400392985 /* MemorialClock.db */,
 				846F430214458C7F00C53ED4 /* howToUse.png */,
+				05475A5D1462566100E12507 /* ADBanner.png */,
+				05475A5B1462566100E12507 /* ADBanner-iPad.png */,
 				050C352214406DC100EC1D91 /* Developer-Info.plist */,
 			);
 			path = Resources;
@@ -414,6 +424,10 @@
 				8440F9FF1446A14E00B4BCB3 /* Icon-72.png in Resources */,
 				052D771C1447CBDC009333F8 /* Default-Portrait~ipad.png in Resources */,
 				059CDF8E1459B94300D94BC1 /* Line.png in Resources */,
+				05475A5F1462566100E12507 /* ADBanner-iPad.png in Resources */,
+				05475A601462566100E12507 /* ADBanner.png in Resources */,
+				05475A641462567900E12507 /* ADBanner-iPad.png in Resources */,
+				05475A651462567900E12507 /* ADBanner.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,6 +463,24 @@
 				050C352814407E3E00EC1D91 /* en */,
 			);
 			name = "RegisterViewController-iPad.xib";
+			sourceTree = "<group>";
+		};
+		05475A5B1462566100E12507 /* ADBanner-iPad.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05475A5C1462566100E12507 /* en */,
+				05475A621462567900E12507 /* ja */,
+			);
+			name = "ADBanner-iPad.png";
+			sourceTree = "<group>";
+		};
+		05475A5D1462566100E12507 /* ADBanner.png */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05475A5E1462566100E12507 /* en */,
+				05475A631462567900E12507 /* ja */,
+			);
+			name = ADBanner.png;
 			sourceTree = "<group>";
 		};
 		05B101CC143C89B800EA2896 /* MainWindow-iPad.xib */ = {

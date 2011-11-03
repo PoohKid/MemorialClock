@@ -170,7 +170,9 @@ typedef enum {
     }
 
     //広告初期化
-    [adBannerView initBannerWithTitle:NSLocalizedString(@"OurMemories", nil) rootViewContoller:self];
+    UIImage *bannerImage = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiomPad) ? [UIImage imageNamed:@"ADBanner-iPad.png"]
+                                                                                  : [UIImage imageNamed:@"ADBanner.png"];
+    [adBannerView initBannerWithTitle:NSLocalizedString(@"OurMemories", nil) image:bannerImage rootViewContoller:self];
 }
 
 - (void)viewDidUnload
